@@ -1,0 +1,163 @@
+<div class="panel-group" id="accordion">
+
+  <!-- Taxonomy -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Taxonomy
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <input type="checkbox" ng-model="taxonomy[0]" ng-change="viroscope.refresh()"> Root
+        (<span ng-model="counts">{{counts[0]}}</span>)<br/>
+        <input type="checkbox" ng-model="taxonomy[1]" ng-change="viroscope.refresh()"> Order
+        (<span ng-model="counts">{{counts[1]}}</span>)<br/>
+        <input type="checkbox" ng-model="taxonomy[2]" ng-change="viroscope.refresh()"> Family
+        (<span ng-model="counts">{{counts[2]}}</span>)<br/>
+        <input type="checkbox" ng-model="taxonomy[3]" ng-change="viroscope.refresh()"> Sub-family
+        (<span ng-model="counts">{{counts[3]}}</span>)<br/>
+        <input type="checkbox" ng-model="taxonomy[4]" ng-change="viroscope.refresh()"> Genus
+        (<span ng-model="counts">{{counts[4]}}</span>)<br/>
+        <input type="checkbox" ng-model="taxonomy[5]" ng-change="viroscope.refresh()"> Species
+        (<span ng-model="counts">{{counts[5]}}</span>)
+        <p/>
+        <input type="checkbox" ng-model="displayUnassignedNodes[0]" ng-change="viroscope.refresh()"> 
+        Group unassigned nodes
+      </div>
+    </div>
+  </div>
+
+  <!-- Morphology -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Morphology
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        <!-- TODO: Metaviridae -->
+        <input type="checkbox" ng-model="morphology.allantoid"         ng-change="viroscope.refresh()"> Allantoid<br/>
+        <input type="checkbox" ng-model="morphology.bacilliform"       ng-change="viroscope.refresh()"> Bacilliform<br/>
+        <input type="checkbox" ng-model="morphology.bottleShaped"      ng-change="viroscope.refresh()"> Bottle shaped<br/>
+        <input type="checkbox" ng-model="morphology.bulletShaped"      ng-change="viroscope.refresh()"> Bullet shaped<br/>
+        <input type="checkbox" ng-model="morphology.coiled"            ng-change="viroscope.refresh()"> Coiled<br/>
+        <input type="checkbox" ng-model="morphology.dropletShaped"     ng-change="viroscope.refresh()"> Droplet shaped<br/>
+        <input type="checkbox" ng-model="morphology.filamentous"       ng-change="viroscope.refresh()"> Filamentous<br/>
+        <input type="checkbox" ng-model="morphology.icosahedral"       ng-change="viroscope.refresh()"> Icosahedral<br/>
+        <input type="checkbox" ng-model="morphology.icosahedralHead"   ng-change="viroscope.refresh()"> Icosahedral head<br/>
+        <input type="checkbox" ng-model="morphology.icosahedralCore"   ng-change="viroscope.refresh()"> Icosahedral core<br/>
+        <input type="checkbox" ng-model="morphology.rnp"               ng-change="viroscope.refresh()"> Intracellular RNP complex<br/>
+        <input type="checkbox" ng-model="morphology.lemonShaped"       ng-change="viroscope.refresh()"> Lemon shaped<br/>
+        <input type="checkbox" ng-model="morphology.ovoidal"           ng-change="viroscope.refresh()"> Ovoidal<br/>
+        <input type="checkbox" ng-model="morphology.pleomorphic"       ng-change="viroscope.refresh()"> Pleomorphic<br/>
+        <input type="checkbox" ng-model="morphology.prolateEllipsoid"  ng-change="viroscope.refresh()"> Prolate ellipsoid<br/>
+        <input type="checkbox" ng-model="morphology.pseudoIcosahedral" ng-change="viroscope.refresh()"> Pseudo icosahedral<br/>
+        <input type="checkbox" ng-model="morphology.quasiSpherical"    ng-change="viroscope.refresh()"> Quasi spherical<br/>
+        <input type="checkbox" ng-model="morphology.rodShaped"         ng-change="viroscope.refresh()"> Rod shaped<br/>
+        <input type="checkbox" ng-model="morphology.shortTail"         ng-change="viroscope.refresh()"> Short tail<br/>
+        <input type="checkbox" ng-model="morphology.spherical"         ng-change="viroscope.refresh()"> Spherical<br/>
+        <input type="checkbox" ng-model="morphology.tail"              ng-change="viroscope.refresh()"> Tail<br/>
+        <input type="checkbox" ng-model="morphology.twoTailed"         ng-change="viroscope.refresh()"> Two tailed<br/>
+        <br/>
+        <div class="btn-group btn-group-xs">
+          <button type="button" class="btn btn-default" ng-click="setAll('morphology', true)">Select all</button>
+          <button type="button" class="btn btn-default" ng-click="setAll('morphology', false)">Select none</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Envelope -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Envelope
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        <input type="checkbox" ng-model="envelope.enveloped"          ng-change="viroscope.refresh()"> Envelope<br/>
+        <input type="checkbox" ng-model="envelope.notEnveloped"       ng-change="viroscope.refresh()"> No envelope<br/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Genome -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+          Genome
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+        <input type="checkbox" ng-model="genome.ssDNA" ng-change="viroscope.refresh()"> ssDNA<br/>
+        <input type="checkbox" ng-model="genome.dsDNA" ng-change="viroscope.refresh()"> dsDNA<br/>
+        <input type="checkbox" ng-model="genome.ssRNA" ng-change="viroscope.refresh()"> ssRNA<br/>
+        <input type="checkbox" ng-model="genome.dsRNA" ng-change="viroscope.refresh()"> dsRNA<br/>
+        <input type="checkbox" ng-model="genome.positive" ng-change="viroscope.refresh()"> Positive sense<br/>
+        <input type="checkbox" ng-model="genome.negative" ng-change="viroscope.refresh()"> Negative sense<br/>
+        <input type="checkbox" ng-model="genome.ambisense" ng-change="viroscope.refresh()"> Ambisense<br/>
+        <br/>
+        <div class="btn-group btn-group-xs">
+          <button type="button" class="btn btn-default" ng-click="setAll('genome', true)">Select all</button>
+          <button type="button" class="btn btn-default" ng-click="setAll('genome', false)">Select none</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Host -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+          Host
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse">
+      <div class="panel-body">
+        <input type="checkbox" ng-model="host.algae" ng-change="viroscope.refresh()"> Algae<br/>
+        <input type="checkbox" ng-model="host.archaea" ng-change="viroscope.refresh()"> Archaea<br/>
+        <input type="checkbox" ng-model="host.bacteria" ng-change="viroscope.refresh()"> Bacteria<br/>
+        <input type="checkbox" ng-model="host.fungi" ng-change="viroscope.refresh()"> Fungi<br/>
+        <input type="checkbox" ng-model="host.invertebrates" ng-change="viroscope.refresh()"> Invertebrates<br/>
+        <input type="checkbox" ng-model="host.protozoa" ng-change="viroscope.refresh()"> Protozoa<br/>
+        <input type="checkbox" ng-model="host.vertebrates" ng-change="viroscope.refresh()"> Vertebrates<br/>
+        <br/>
+        <div class="btn-group btn-group-xs">
+          <button type="button" class="btn btn-default" ng-click="setAll('host', true)">Select all</button>
+          <button type="button" class="btn btn-default" ng-click="setAll('host', false)">Select none</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Display -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+          Display
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSix" class="panel-collapse collapse">
+      <div class="panel-body">
+        Misc... baltimore type
+      </div>
+    </div>
+  </div>
+
+</div>

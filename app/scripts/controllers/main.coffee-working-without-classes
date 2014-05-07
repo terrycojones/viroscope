@@ -1,0 +1,300 @@
+'use strict'
+
+ORDER = 1
+FAMILY = 2
+SUBFAMILY = 3
+GENUS = 4
+SPECIES = 5
+
+# Colors from http://colorbrewer2.org/
+# COLORS = ['',   '#253494', '#2c7fb8', '#41b6c4', '#a1dab4', '#ffffcc']
+COLORS = ['red',   '#253494', '#2c7fb8', '#41b6c4', '#a1dab4', '#ffffcc']
+
+LEVELS = ['root', 'order', 'family', 'sub-family', 'genus', 'species']
+
+ViroscopeException = (message) ->
+   this.message = message
+   this.name = 'ViroscopeException'
+
+getCounts = (nodes) ->
+    result = [0, 0, 0, 0, 0, 0]
+    for node in nodes
+        if node.name != 'Unassigned'
+            result[node.level]++
+    result
+
+addProperties = (properties, tree) ->
+    recurse = (propertyNode, treeNode) ->
+        treeNode.properties = propertyNode.properties
+        if propertyNode.children
+            if not treeNode.children
+                throw new ViroscopeException("Tree ran out of children before properties did")
+            for name of propertyNode.children
+                if name not of treeNode.children
+                    throw new ViroscopeException("Could not find name #{name} in tree")
+                recurse propertyNode.children[name], treeNode.children[name]
+    recurse properties, tree
+
+convertToChildLists = (tree) ->
+    # In each node of tree, children are kept in an object keyed by name.
+    # Convert the dict to a list of objects, and put a name attribute into
+    # each object. This makes for easier processing in the Viroscope class.
+    convertNodeToList = (name, node, level, parent) ->
+        result =
+            children: []
+            name: name
+            parent: parent
+            properties: node.properties
+            level: level
+            hidden: false
+        for childName of node.children
+            result.children.push(
+                convertNodeToList(childName, node.children[childName], level + 1, node))
+        if result.children.length == 0
+            # This is a species node (which has no children).
+            result.typeSpecies = node.typeSpecies
+        result
+    convertNodeToList 'root', tree, 0, null
+
+ancestors = (node) ->
+    result = [node]
+    while node.parent
+        result.push node.parent
+        node = node.parent
+    result.reverse()
+
+properties = (node) ->
+    result = {}
+    for ancestor in ancestors(node)
+        if ancestor.properties
+            angular.extend result, ancestor.properties
+    result
+
+invertHidden = (tree) ->
+    # Invert the manually hidden status of a node, and set the manually
+    # hidden status of those below it to the same value.
+    hidden = not tree.hidden
+    recurse = (node) ->
+        node.hidden = hidden
+        recurse child for child in node.children
+    recurse tree
+
+flatten = (tree, $scope) ->
+    nodes = []
+    links = []
+    i = 0
+    recurse = (node, parent) ->
+        if not node.id
+            node.id = i++
+        hidden = node.hidden or not $scope.taxonomy[node.level]
+        if not hidden
+            nodes.push node
+            if parent?
+                links.push {
+                    level: node.level
+                    source: parent
+                    target: node
+                }
+        for child in node.children
+            recurse(child, (if hidden then parent else node))
+    recurse tree, null
+    return {
+        nodes: nodes
+        links: links
+    }
+
+
+class Viroscope
+
+    constructor: (@root, @properties, @$scope) ->
+        addProperties(@properties, @root)
+        @root = convertToChildLists(@root)
+        @selectedNode = null
+        # console.log 'Root', @root
+
+        width = 1200
+        height = 800
+
+        @force = d3.layout.force()
+            .size([width, height])
+            .charge(-150)
+            .gravity(0.2)
+            .linkDistance(80)
+            .on('tick', @tick)
+
+        @force.drag()
+            .on('dragstart', @dragstart)
+
+        outer = d3.select('#viroscope')
+            .append('svg:svg')
+            .attr('class', 'main-view')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('pointer-events', 'all')
+
+        @vis = outer
+            .append('svg:g')
+                .attr('class', 'outer1')
+                .call(d3.behavior.zoom().on('zoom', @rescale))
+                .on('dblclick.zoom', null)
+            .append('svg:g')
+                .attr('class', 'outer2')
+                .on('mousedown', @mousedown)
+                .on('mousemove', @mousemove)
+                .on('mouseup', @mouseup)
+                .on('mousedown', @mousedown)
+
+        @vis.append('svg:rect')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('fill', 'white')
+
+        @link = @vis.selectAll('.link')
+        @node = @vis.selectAll('.node')
+
+        d3.select(window).on('keydown', @keydown)
+        @refresh()
+
+    rescale: () =>
+        trans = d3.event.translate
+        scale = d3.event.scale
+        # console.log 'rescale:', trans, scale
+        @vis.attr('transform', "translate(#{trans}) scale(#{scale})")
+
+    mousedown: () =>
+        # console.log 'mouse down', @rescale
+        # console.log 'zoom', d3.behavior.zoom().on('zoom')
+        # Allow panning if nothing is selected.
+        @vis.call(d3.behavior.zoom().on('zoom', @rescale))
+
+    mousemove: () =>
+        # console.log 'mouse move'
+
+    mouseup: () =>
+        # console.log 'mouse up'
+
+    mousedown: () =>
+        # console.log 'mouse down'
+
+    mouseOffNode: (d) =>
+        # console.log 'mouse off node'
+        @selectedNode = null
+        @$scope.selectedNode = null
+        @$scope.$apply()
+
+    mouseOverNode: (d) =>
+        # console.log 'mouse over node', d.name
+        if d.name isnt 'root'
+            @selectedNode = d
+            @$scope.selectedNode = d
+            @$scope.$apply()
+
+    # Toggle children on click.
+    click: (d) =>
+        # console.log 'click'
+        if d3.event.defaultPrevented
+            # Ignore dragging.
+            return
+        invertHidden child for child in d.children
+        @refresh()
+
+    tick: =>
+        @link.attr('x1', (d) -> d.source.x)
+          .attr('y1', (d) -> d.source.y)
+          .attr('x2', (d) -> d.target.x)
+          .attr('y2', (d) -> d.target.y)
+        @node.attr('transform', (d) -> "translate(#{d.x}, #{d.y})")
+
+    dblclick: (d) ->
+        d3.select(this).classed('fixed', d.fixed = false)
+
+    dragstart: (d) ->
+        # d3.select(this).classed('fixed', d.fixed = true)
+
+    keydown: () =>
+        console.log 'key:', d3.event.keyCode
+        if not @selectedNode
+            return
+
+        switch d3.event.keyCode
+            when 65 # a = attributes
+                console.log 'ancestors', ancestors(@selectedNode)
+                console.log 'properties', properties(@selectedNode)
+            when 67 # c = click
+                invertHidden child for child in @selectedNode.children
+                @refresh()
+            when 73 # i = info
+                @$scope.selectedNode = @selectedNode
+                @$scope.$apply()
+            when 80 # p = pin
+                @selectedNode.fixed = true
+            when 82 # r = release (from being pinned)
+                @selectedNode.fixed = false
+
+    refresh: ->
+        f = flatten(@root, @$scope)
+        for node in f.nodes
+            node.properties = properties(node)
+        nodes = f.nodes
+        links = f.links
+
+        # Calculate how many of each level (order, family, etc) we are
+        # displaying.
+        @$scope.counts = getCounts(nodes)
+
+        # Restart the force layout.
+        @force.nodes(nodes).links(links)
+
+        # Update links.
+        @link = @link.data(links)
+        @link.exit().remove()
+        @link.enter().insert('line', '.node').attr('class', 'link')
+
+        # Update nodes.
+        @node = @node.data(nodes, (d) -> d.id)
+        @node.exit().remove()
+
+        nodeEnter = @node.enter().append('g')
+            .attr('class', 'node')
+            # .on('dblclick', dblclick)
+            .call(@force.drag)
+
+        nodeEnter.append('circle')
+            .attr('r', 6)
+            .on('click', @click)
+            .on('mouseover', @mouseOverNode)
+            .on('mouseout', @mouseOffNode)
+
+        nodeEnter.append('text')
+            .attr('dy', '1.5em')
+            .text((d) ->
+                if d.name == 'Unassigned'
+                    'Unassigned ' + LEVELS[d.level]
+                else
+                    d.name
+            )
+
+        @node.select('circle')
+            .style('fill', (d) -> COLORS[d.level])
+
+        if d3.event
+            # prevent browser's default behavior
+            d3.event.preventDefault()
+
+        @force.start()
+
+
+angular.module('viroscope-app')
+    .controller('MainCtrl', ($scope, $http) ->
+        # TODO: make these requests in parallel.
+        $http.get('/api/taxonomy').success (root) ->
+            $http.get('/api/properties').success (properties) ->
+                # root, order, family, subfamily, genus, species.
+                # In $scope.taxonomy, values are true if that level of the
+                # taxonomy should be shown.
+                $scope.taxonomy = [true, true, true, true, false, false]
+                $scope.selectedNode = null
+                $scope.counts = [0, 0, 0, 0, 0, 0]
+                $scope.data = root
+                $scope.viroscope = new Viroscope root, properties, $scope
+    )

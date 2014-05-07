@@ -1,0 +1,104 @@
+{
+    "children": {
+        "Caudovirales": {
+            "properties": {
+                "genome": {
+                    "type": "dsDNA"
+                },
+                "envelope": false,
+                "morphologyKeywords": "icosahedral head with tail",
+                "virionSize": [60, 145],
+                "genomeSize": [16, 317],
+                "host": ["B", "Ar"]
+            },
+            "children": {
+                "Myoviridae": {
+                    "properties": {
+                        "genome": {
+                            "type": "dsDNA"
+                        },
+                        "envelope": false,
+                        "morphology": "icosahedral head with tail",
+                        "virionSize": [60, 145],
+                        "genomeSize": [31, 317],
+                        "host": ["B", "Ar"]
+                    }
+                },
+                "Podoviridae": {
+                    "properties": {
+                        "genome": {
+                            "type": "dsDNA"
+                        },
+                        "envelope": false,
+                        "morphology": "icosahedral head with short tail",
+                        "virionSize": [60, 70],
+                        "genomeSize": [16, 78],
+                        "host": ["B"]
+                    }
+                },
+                "Siphoviridae": {
+                    "properties": {
+                        "genome": {
+                            "type": "dsDNA"
+                        },
+                        "envelope": false,
+                        "morphology": "icosahedral head with tail",
+                        "virionSize": [40, 80],
+                        "genomeSize": [21, 134],
+                        "host": ["B", "Ar"]
+                    }
+                }
+            }
+        },
+        "Herpesvirales": {
+            "properties": {
+                "genome": {
+                    "type": "dsDNA"
+                },
+                "envelope": true,
+                "morphologyKeywords": "spherical icosahedral core",
+                "virionSize": [160, 300],
+                "genomeSize": [125, 295],
+                "host": ["V", "I"]
+            },
+            "children": {
+                "Alloherpesviridae": {
+                    "properties": {
+                        "genome": {
+                            "type": "dsDNA"
+                        },
+                        "envelope": true,
+                        "morphology": "spherical virion, icosahedral core",
+                        "virionSize": [160, 300],
+                        "genomeSize": [134, 295],
+                        "host": ["V"]
+                    }
+                },
+                "Herpesviridae": {
+                    "properties": {
+                        "genome": {
+                            "type": "dsDNA"
+                        },
+                        "envelope": true,
+                        "morphology": "spherical virion, icosahedral core",
+                        "virionSize": [160, 300],
+                        "genomeSize": [125, 241],
+                        "host": ["V"]
+                    }
+                },
+                "Malacoherpesviridae": {
+                    "properties": {
+                        "genome": {
+                            "type": "dsDNA"
+                        },
+                        "envelope": true,
+                        "morphology": "icosahedral",
+                        "virionSize": [160, 300],
+                        "genomeSize": 207,
+                        "host": ["I"]
+                    }
+                }
+            }
+        }
+    }
+}

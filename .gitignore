@@ -1,0 +1,14 @@
+node_modules
+public
+.tmp
+.sass-cache
+app/bower_components
+/views
+dist
+*~
+test/server/thing/data.js
+test/server/thing/data.js.map
+lib/controllers/api.js
+lib/controllers/api.js.map
+lib/controllers/data.js
+lib/controllers/data.js.map

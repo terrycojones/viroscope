@@ -1,0 +1,21 @@
+<div ng-model="infoNode">
+  <div ng-show="infoNode">
+    <div class="info-box">
+      <span class="virus-name">{{infoNode.format().ancestry()}}</span><br/><br/>
+
+      <span class="info-title">Morphology:</span> {{infoNode.format().morphology()}}<br/>
+      <span class="info-title">Genome type:</span> {{infoNode.format().genome()}}<br/>
+      <span class="info-title">Genome size:</span> {{infoNode.format().genomeSize()}}<br/>
+      <span class="info-title">Enveloped:</span> {{infoNode.format().envelope()}}<br/>
+      <span class="info-title">Virion size:</span> {{infoNode.format().virionSize()}}<br/>
+      <span class="info-title">Host:</span> {{infoNode.format().host()}}<br/>
+
+      <div ng-show="infoNodeLocked">
+        <br/>
+        <div class="btn-group btn-group-xs">
+          <button type="button" class="btn btn-default" ng-click="unlockInfoNode()">Unlock</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
