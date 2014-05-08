@@ -1,7 +1,9 @@
 # TODO
 
+* Show a progress bar while loading virus and propery data
 * Enter all virus data
 * Text search box
+* Full text search on properties
 * Add links to
   * Wikipedia
   * ViralZone

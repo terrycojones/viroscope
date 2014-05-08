@@ -8,8 +8,7 @@
     "jquery": "~1.11.0",
     "bootstrap": "~3.0.3",
     "angular-sanitize": "1.2.11",
-    "d3": "~3.4.3",
-    "csv": "~0.1.2"
+    "d3": "~3.4.3"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",

@@ -206,20 +206,21 @@ class Node
 
 
 class Viroscope
-    constructor: (@root, @$scope) ->
+    constructor: ->
+        @$scope = null
+        @root = null
         @selectedNode = null
-        console.log 'Root', @root
 
-        width = 1200
-        height = 800
+        width = 600
+        height = 200
 
-        aspect = width / height
-        chart = $ '#viroscope'
-        d3.select(window).on('resize', ->
-            targetWidth = chart.parent().width()
-            chart.attr 'width', targetWidth
-            chart.attr 'height', targetWidth / aspect
-        )
+        # aspect = width / height
+        # chart = $ '#viroscope'
+        # d3.select(window).on('resize', ->
+        #     targetWidth = chart.parent().width()
+        #     chart.attr 'width', targetWidth
+        #     chart.attr 'height', targetWidth / aspect
+        # )
 
         @force = d3.layout.force()
             .size([width, height])
@@ -234,8 +235,10 @@ class Viroscope
         svg = d3.select('#viroscope')
             .append('svg')
                 .attr('class', 'main-view')
+                .attr('width', width)
+                .attr('height', height)
                 .attr('width', '100%')
-                .attr('height', '88%')
+                .attr('height', '85%')
                 .attr('viewBox', '0 0 ' + width + ' ' + height )
                 .attr('preserveAspectRatio', 'xMidYMid')
                 .attr('pointer-events', 'all')
@@ -260,7 +263,6 @@ class Viroscope
         @node = @vis.selectAll('.node')
 
         d3.select(window).on('keydown', @keydown)
-        @refresh()
 
     rescale: () =>
         trans = d3.event.translate
@@ -351,7 +353,13 @@ class Viroscope
                 result[node.level]++
         @$scope.counts = result
 
-    refresh: =>
+    refresh: (data, $scope) =>
+        console.log 'Refresh'
+        if data
+            @root = data
+            @$scope = $scope
+            console.log 'Root', @root
+            console.log 'Scope', @$scope
         f = @root.flatten @$scope
         nodes = f.nodes
         links = f.links
@@ -423,78 +431,83 @@ convertToChildLists = (tree) ->
         result
     convertNodeToList 'root', tree, 0, null
 
+initializeScope = ($scope) ->
+    # root, order, family, subfamily, genus, species.
+    # In $scope.taxonomy, values are true if that level of the
+    # taxonomy should be shown.
+    $scope.taxonomy = [false, true, true, false, false, false]
+    $scope.displayUnassignedNodes = [false]
+    $scope.infoNode = null
+    $scope.infoNodeLocked = false
+    $scope.counts = [0, 0, 0, 0, 0, 0]
+    $scope.morphology =
+        allantoid: true
+        bacilliform: true
+        bottleShaped: true
+        bulletShaped: true
+        coiled: true
+        dropletShaped: true
+        filamentous: true
+        icosahedral: true
+        icosahedralHead: true
+        icosahedralCore: true
+        rnp: true
+        lemonShaped: true
+        ovoidal: true
+        pleomorphic: true
+        prolateEllipsoid: true
+        pseudoIcosahedral: true
+        quasiSpherical: true
+        rodShaped: true
+        shortTail: true
+        spherical: true
+        tail: true
+        twoTailed: true
+    $scope.envelope =
+        enveloped: true
+        notEnveloped: true
+    $scope.host =
+        algae: true
+        archaea: true
+        bacteria: true
+        fungi: true
+        invertebrates: true
+        protozoa: true
+        vertebrates: true
+    $scope.genome =
+        ssDNA: true
+        dsDNA: true
+        ssRNA: true
+        dsRNA: true
+        positive: true
+        negative: true
+        ambisense: true
+    $scope.setAll = (attr, value) ->
+        for name of $scope[attr]
+            $scope[attr][name] = value
+        $scope.viroscope.refresh()
+
+    $scope.unlockInfoNode = ->
+        $scope.infoNodeLocked = false
+
+    $scope.searchText = ''
+    $scope.search = ->
+        console.log 'searching for', $scope.searchText
+        $scope.viroscope.refresh()
+
 angular.module('viroscope-app')
     .controller('MainCtrl', ($scope, $http) ->
-        # TODO: make these requests in parallel.
-        $http.get('/api/taxonomy').success (root) ->
-            $http.get('/api/properties').success (properties) ->
-                # root, order, family, subfamily, genus, species.
-                # In $scope.taxonomy, values are true if that level of the
-                # taxonomy should be shown.
-                $scope.taxonomy = [false, true, true, false, false, false]
-                $scope.displayUnassignedNodes = [false]
-                $scope.infoNode = null
-                $scope.infoNodeLocked = false
-                $scope.counts = [0, 0, 0, 0, 0, 0]
-                $scope.morphology =
-                    allantoid: true
-                    bacilliform: true
-                    bottleShaped: true
-                    bulletShaped: true
-                    coiled: true
-                    dropletShaped: true
-                    filamentous: true
-                    icosahedral: true
-                    icosahedralHead: true
-                    icosahedralCore: true
-                    rnp: true
-                    lemonShaped: true
-                    ovoidal: true
-                    pleomorphic: true
-                    prolateEllipsoid: true
-                    pseudoIcosahedral: true
-                    quasiSpherical: true
-                    rodShaped: true
-                    shortTail: true
-                    spherical: true
-                    tail: true
-                    twoTailed: true
-                $scope.envelope =
-                    enveloped: true
-                    notEnveloped: true
-                $scope.host =
-                    algae: true
-                    archaea: true
-                    bacteria: true
-                    fungi: true
-                    invertebrates: true
-                    protozoa: true
-                    vertebrates: true
-                $scope.genome =
-                    ssDNA: true
-                    dsDNA: true
-                    ssRNA: true
-                    dsRNA: true
-                    positive: true
-                    negative: true
-                    ambisense: true
 
-                $scope.setAll = (attr, value) ->
-                    for name of $scope[attr]
-                        $scope[attr][name] = value
-                    $scope.viroscope.refresh()
+        $scope.viroscope = new Viroscope
+        initializeScope $scope
 
-                $scope.unlockInfoNode = ->
-                    $scope.infoNodeLocked = false
-
-                $scope.searchText = ''
-                $scope.search = ->
-                    $scope.viroscope.refresh()
-
-                # console.log 'properties', properties
-                addProperties properties, root
-                root = convertToChildLists root
-                root.addMorphologyKeywords()
-                $scope._converted = root # Used in testing
-                $scope.viroscope = new Viroscope root, $scope
+        d = $.when $.getJSON('/api/taxonomy'), $.getJSON('/api/properties')
+        d.done (taxonomyXHR, propertiesXHR) ->
+            taxonomy = taxonomyXHR[0]
+            properties = propertiesXHR[0]
+            addProperties properties, taxonomy
+            root = convertToChildLists taxonomy
+            root.addMorphologyKeywords()
+            $scope._converted = root # Used in testing
+            $scope.viroscope.refresh root, $scope
     )

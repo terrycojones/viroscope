@@ -36,10 +36,18 @@
         <div class="col-sm-2">
           <div ng-include="'partials/accordion'"></div>
 
-          <!-- Search -->
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-            <input type="text" class="form-control" placeholder="Search..." ng-model="searchText" ng-change="search()">
+          <!-- 
+              Why does this include cause the $scope.searchText variable
+              in main.coffee to not get updated?  We have to include the
+              search.html text here for some reason.
+
+              <div ng-include="'partials/search'"></div>
+          -->
+          <div id="search">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+              <input type="text" class="form-control" placeholder="Search..." ng-model="searchText" ng-change="search()">
+            </div>
           </div>
 
           <div ng-include="'partials/info'"></div>
