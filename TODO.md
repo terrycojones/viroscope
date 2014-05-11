@@ -4,7 +4,6 @@
 * Add links to
   * Wikipedia
   * ViralZone
-* Make it so we can drag nodes again
 * Add alternate layouts
 * Make the zero counts in the taxonomy section instead show how many nodes
   are hidden at that level

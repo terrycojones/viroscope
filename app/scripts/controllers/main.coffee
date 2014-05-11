@@ -14,18 +14,19 @@ LEVELS = ['root', 'order', 'family', 'sub-family', 'genus', 'species']
 
 
 class Node
+    this.hostAbbrevs =
+        Al: 'Algae'
+        Ar: 'Archaea'
+        B: 'Bacteria'
+        F: 'Fungi'
+        I: 'Invertebrates'
+        P: 'Protozoa'
+        V: 'Vertebrates'
+
     constructor: (@name, @parent, @properties, @level) ->
         @children = []
         @hidden = false
         @allProperties = null
-        @hostAbbrevs =
-            Al: 'Algae'
-            Ar: 'Archaea'
-            B: 'Bacteria'
-            F: 'Fungi'
-            I: 'Invertebrates'
-            P: 'Protozoa'
-            V: 'Vertebrates'
 
         @format =
             ancestry: =>
@@ -70,7 +71,7 @@ class Node
                     ''
             host: =>
                 if @allProperties.host?
-                    (@hostAbbrevs[host] for host in @allProperties.host).join(', ')
+                    (Node.hostAbbrevs[host] for host in @allProperties.host).join(', ')
                 else
                     ''
 
@@ -116,6 +117,10 @@ class Node
                 node.properties.morphologyKeywords = node.properties.morphology
             recurse child for child in node.children
         recurse @
+
+    unpinAll: =>
+        @fixed = false
+        child.unpinAll() for child in @children
 
     invertHidden: =>
         # Invert the hidden status of this node, and set the hidden status
@@ -270,8 +275,7 @@ class Viroscope
             .linkDistance(80)
             .on('tick', @tick)
 
-        # @force.drag()
-        #     .on('dragstart', @dragstart)
+        @drag = @force.drag().on('dragstart', @dragstart).on('dragend', @dragend)
 
         svg = d3.select('#viroscope')
             .append('svg')
@@ -285,21 +289,7 @@ class Viroscope
                 .attr('pointer-events', 'all')
             .call(d3.behavior.zoom().on('zoom', @rescale))
 
-        @vis = svg
-            # .append('svg:g')
-            # .call(d3.behavior.zoom().on('zoom', @rescale))
-            # .on('dblclick.zoom', null)
-            .append('svg:g')
-                .on('mousedown', @mousedown)
-                .on('mousemove', @mousemove)
-                .on('mouseup', @mouseup)
-                .on('mousedown', @mousedown)
-
-        # @vis.append('svg:rect')
-        #     .attr('width', width)
-        #     .attr('height', height)
-        #     .attr('fill', 'white')
-
+        @vis = svg.append('svg:g')
         @link = @vis.selectAll('.link')
         @node = @vis.selectAll('.node')
 
@@ -308,26 +298,13 @@ class Viroscope
     rescale: =>
         trans = d3.event.translate
         scale = d3.event.scale
-        # console.log 'rescale:', trans, scale
         @vis.attr('transform', "translate(#{trans}) scale(#{scale})")
 
     mousedown: =>
-        # console.log 'mouse down', @rescale
-        # console.log 'zoom', d3.behavior.zoom().on('zoom')
         # Allow panning if nothing is selected.
         @vis.call(d3.behavior.zoom().on('zoom', @rescale))
 
-    mousemove: =>
-        # console.log 'mouse move'
-
-    mouseup: =>
-        # console.log 'mouse up'
-
-    mousedown: =>
-        # console.log 'mouse down'
-
     mouseOffNode: (d) =>
-        # console.log 'mouse off node'
         @selectedNode = null
         unless @$scope.infoNodeLocked
             @$scope.infoNode = null
@@ -340,16 +317,6 @@ class Viroscope
                 @$scope.infoNode = d
                 @$scope.$apply()
 
-    # Toggle children on click.
-    click: (d) =>
-        # console.log 'click'
-        if d3.event.defaultPrevented
-            # console.log 'Ignore dragging'
-            # Ignore dragging.
-            return
-        child.invertHidden() for child in d.children
-        @refresh()
-
     tick: =>
         @link.attr('x1', (d) -> d.source.x)
           .attr('y1', (d) -> d.source.y)
@@ -357,32 +324,49 @@ class Viroscope
           .attr('y2', (d) -> d.target.y)
         @node.attr('transform', (d) -> "translate(#{d.x}, #{d.y})")
 
-    dblclick: (d) ->
-        d3.select(this).classed('fixed', d.fixed = false)
+    unpinAll: =>
+        @root.unpinAll()
+        @$scope.nodesPinned = 0
 
-    dragstart: (d) ->
-        # d3.select(this).classed('fixed', d.fixed = true)
+    dragstart: (d) =>
+        @dragStartTime = Date.now()
+        d3.event.sourceEvent.stopPropagation()
+
+    dragend: (d) =>
+        elapsed = Date.now() - @dragStartTime
+        if elapsed > 150
+            # A slow mouse click, consider it a drag.
+            d.fixed = true
+            @$scope.nodesPinned++
+        else
+            # This is a regular (i.e., fast) mouse click.
+            child.invertHidden() for child in d.children
+            @refresh()
 
     keydown: =>
-        # console.log 'key:', d3.event.keyCode
         if not @selectedNode
             return
 
         switch d3.event.keyCode
-            when 65 # a = all properties
+            when 65 # a = log all node properties.
                 console.log 'Selected node', @selectedNode
-            when 67 # c = click
-                child.invertHidden() for child in @selectedNode.children
-                @refresh()
             when 76 # l = lock
                 @$scope.infoNode = @selectedNode
                 @$scope.infoNodeLocked = true
                 @$scope.$apply()
             when 80 # p = pin
                 @selectedNode.fixed = true
+                @$scope.nodesPinned++
             when 82 # r = release (from being pinned)
+                # TODO: Figure out how to d3.select @selectedNode and
+                # change its class (I know how to do the last part).
+                #
+                # target = d3.event.target || d3.event.srcElement
+                # d3.select(target).classed('fixed', false)
                 @selectedNode.fixed = false
-            when 85 # u = unlock
+                @$scope.nodesPinned--
+                @$scope.$apply()
+            when 85 # u = unlock info node.
                 @$scope.infoNodeLocked = false
                 @$scope.infoNode = @selectedNode
                 @$scope.$apply()
@@ -412,17 +396,14 @@ class Viroscope
         @link.enter().insert('line', '.node').attr('class', 'link')
 
         # Update nodes.
-        @node = @node.data(nodes, (d) -> d.id)
-            .call(@force.drag)
+        @node = @node.data(nodes, (d) -> d.id).call(@drag)
         @node.exit().remove()
 
-        nodeEnter = @node.enter().append('g')
-            .attr('class', 'node')
-            # .on('dblclick', dblclick)
+        nodeEnter = @node.enter().append('g').attr('class', 'node')
 
         nodeEnter.append('circle')
             .attr('r', 6)
-            .on('click', @click)
+            # .on('click', @click)
             .on('mouseover', @mouseOverNode)
             .on('mouseout', @mouseOffNode)
 
@@ -438,9 +419,9 @@ class Viroscope
         @node.select('circle')
             .style('fill', (d) -> COLORS[d.level])
 
-        if d3.event
-            # prevent browser's default behavior
-            d3.event.preventDefault()
+        # if d3.event
+        #     # Prevent browser's default behavior
+        #     d3.event.preventDefault()
 
         @force.start()
 
@@ -467,6 +448,7 @@ initializeScope = ($scope) ->
     $scope.taxonomy = [true, true, true, true, false, false]
     $scope.searchText = ''
     $scope.displayUnassignedNodes = [true]
+    $scope.nodesPinned = 0
     $scope.infoNode = null
     $scope.infoNodeLocked = false
     $scope.counts = [0, 0, 0, 0, 0, 0]
@@ -550,6 +532,9 @@ initializeScope = ($scope) ->
 
     $scope.unlockInfoNode = ->
         $scope.infoNodeLocked = false
+
+    $scope.unpinAll = ->
+        $scope.viroscope.unpinAll()
 
 angular.module('viroscope-app')
     .controller 'MainCtrl', ($scope, $http) ->

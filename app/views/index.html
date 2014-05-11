@@ -51,8 +51,19 @@
             </div>
           </div>
 
+          <!-- Unpin button -->
+          <div ng-model="nodesPinned">
+            <div ng-show="nodesPinned > 0">
+              <div class="btn-group btn-group-xs">
+                <button type="button" class="btn btn-default" id="release-pinned-nodes" ng-click="unpinAll()">Release pinned nodes</button>
+              </div>
+            </div>
+          </div>
+
           <div ng-include="'partials/info'"></div>
+
         </div>
+
         <div class="col-sm-10">
           <div id="viroscope"></div>
         </div>
