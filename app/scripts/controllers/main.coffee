@@ -12,10 +12,6 @@ COLORS = ['red',   '#253494', '#2c7fb8', '#41b6c4', '#a1dab4', '#ffffcc']
 
 LEVELS = ['root', 'order', 'family', 'sub-family', 'genus', 'species']
 
-ViroscopeException = (message) ->
-   this.message = message
-   this.name = 'ViroscopeException'
-
 
 class Node
     constructor: (@name, @parent, @properties, @level) ->
@@ -31,6 +27,53 @@ class Node
             P: 'Protozoa'
             V: 'Vertebrates'
 
+        @format =
+            ancestry: =>
+                (ancestor.name for ancestor in @ancestors()).filter((name) -> name isnt 'Unassigned').join(' / ')
+            links: =>
+                return @allProperties.links ? []
+            genome: =>
+                # TODO: Remove
+                if not @allProperties.genome?
+                    return 'not set yet'
+                sense = []
+                if @allProperties.genome.positive
+                    sense.push '+'
+                if @allProperties.genome.negative
+                    sense.push '-'
+                if @allProperties.genome.ambisense
+                    sense.push '+/-'
+                @allProperties.genome.type + (if sense.length then ' (' + sense.join(', ') + ')' else '')
+            envelope: =>
+                if @allProperties.envelope then 'yes' else 'no'
+            morphology: =>
+                # TODO: Fix the case where there is no morphology.
+                return @allProperties.morphology ? ''
+            genomeLength: =>
+                if @allProperties.genome.lengthDescription?
+                    @allProperties.genome.lengthDescription
+                else if angular.isArray @allProperties.genome.length
+                    @allProperties.genome.length[0] + '-' + @allProperties.genome.length[1]
+                else
+                    ''
+            genomeConfiguration: =>
+                if @allProperties.genome?.configurationDescription?
+                    @allProperties.genome.configurationDescription
+                else
+                    ''
+            virionDescription: =>
+                if @allProperties.virionDescription?
+                    @allProperties.virionDescription
+                else if angular.isArray @allProperties.virionSize
+                    @allProperties.virionSize[0] + '-' + @allProperties.virionSize[1]
+                else
+                    ''
+            host: =>
+                if @allProperties.host?
+                    (@hostAbbrevs[host] for host in @allProperties.host).join(', ')
+                else
+                    ''
+
     addChild: (child) =>
         @children.push child
 
@@ -42,70 +85,39 @@ class Node
             node = node.parent
         result.reverse()
 
-    computeAllProperties: () =>
-        if @allProperties
-            return
-        else
-            @allProperties = {}
-            for ancestor in @ancestors()
-                if ancestor.properties
-                    angular.extend @allProperties, ancestor.properties
+    computeFullText: =>
+        # The fullText property is used in search.
+        full = [ @name ]
+        for property of @allProperties
+            if property != 'genome'
+                if typeof @allProperties[property] != 'boolean'
+                    full.push JSON.stringify(@allProperties[property])
+        if @allProperties.genome
+            for property of @allProperties.genome
+                if typeof @allProperties.genome[property] != 'boolean'
+                    full.push JSON.stringify(@allProperties.genome[property])
+        full.push JSON.stringify(@format.host())
+        full.join(' ').toLowerCase()
 
-    format: () =>
-        @computeAllProperties()
-        return {
-            ancestry: =>
-                #if @name isnt 'Unassigned'
-                (ancestor.name for ancestor in @ancestors()).filter((name) -> name isnt 'Unassigned').join(' / ')
-            genome: =>
-                # TODO: Remove
-                if not @allProperties.genome?
-                    return 'not set yet'
-                sense = []
-                if @allProperties.genome.positive
-                    sense.push '+'
-                if @allProperties.genome.negative
-                    sense.push '+'
-                if @allProperties.genome.ambisense
-                    sense.push '+/-'
-                @allProperties.genome.type + (if sense.length then ' (' + sense.join(', ') + ')' else '')
-            envelope: =>
-                @allProperties.envelope
-            morphology: =>
-                # TODO: Fix the case where there is no morphology.
-                return @allProperties.morphology ? ''
-            genomeSize: =>
-                if @allProperties.genomeSize?
-                    if typeof @allProperties.genomeSize == 'number'
-                        @allProperties.genomeSize + ' bp'
-                    else
-                        @allProperties.genomeSize[0] + '-' + @allProperties.genomeSize[1] + ' bp'
-                else
-                    'nothing'
-            virionSize: =>
-                if @allProperties.virionSize?
-                    if typeof @allProperties.virionSize == 'number'
-                        @allProperties.virionSize + ' bp'
-                    else
-                        @allProperties.virionSize[0] + '-' + @allProperties.virionSize[1] + ' nm'
-                else
-                    'nada'
-            host: =>
-                if @allProperties.host?
-                    (@hostAbbrevs[host] for host in @allProperties.host).join(', ')
-                else
-                    'no host...'
+    computeAllProperties: =>
+        @allProperties = {}
+        if @parent and @parent.allProperties
+            angular.extend @allProperties, @parent.allProperties
+        if @properties
+            angular.extend @allProperties, @properties
+        @fullText = @computeFullText()
 
-        }
+        for child in @children
+            child.computeAllProperties()
 
-    addMorphologyKeywords: () =>
+    addMorphologyKeywords: =>
         recurse = (node) ->
             if node.properties.morphology and not node.properties.morphologyKeywords
                 node.properties.morphologyKeywords = node.properties.morphology
             recurse child for child in node.children
         recurse @
 
-    invertHidden: () =>
+    invertHidden: =>
         # Invert the hidden status of this node, and set the hidden status
         # of its children to the same value.
         hidden = not @hidden
@@ -115,19 +127,17 @@ class Node
         recurse @
 
     showAccordingToAttributes: ($scope) =>
-        @computeAllProperties()
-
         return (
             (
-                $scope.searchText.length == 0 or @name.toLowerCase().indexOf($scope.searchText) > -1
+                $scope.searchText.length == 0 or @fullText.indexOf($scope.searchText.toLowerCase()) > -1
             ) and (
-                # Envelope
-                @allProperties.envelope == undefined or # TODO: remove this line.
+                # Envelope.
+                @allProperties.envelope is undefined or
                 $scope.envelope.enveloped and @allProperties.envelope or
                 $scope.envelope.notEnveloped and not @allProperties.envelope
             ) and (
-                # Shape
-                @allProperties.morphologyKeywords == undefined or # TODO: remove this line.
+                # Morphology.
+                @allProperties.morphologyKeywords is undefined or
                 $scope.morphology.allantoid         and @allProperties.morphologyKeywords.indexOf('allantoid') > -1 or
                 $scope.morphology.bacilliform       and @allProperties.morphologyKeywords.indexOf('bacilliform') > -1 or
                 $scope.morphology.bottleShaped      and @allProperties.morphologyKeywords.indexOf('bottle-shaped') > -1 or
@@ -151,25 +161,55 @@ class Node
                 $scope.morphology.tail              and @allProperties.morphologyKeywords.indexOf('tail') > -1 or
                 $scope.morphology.twoTailed         and @allProperties.morphologyKeywords.indexOf('two-tailed') > -1
             ) and (
-                # Host
-                @allProperties.host == undefined or # TODO: remove this line.
+                # Host.
+                @allProperties.host is undefined or
                 $scope.host.algae         and 'Al' in @allProperties.host or
                 $scope.host.archaea       and 'Ar' in @allProperties.host or
                 $scope.host.bacteria      and 'B'  in @allProperties.host or
                 $scope.host.fungi         and 'F'  in @allProperties.host or
                 $scope.host.invertebrates and 'I'  in @allProperties.host or
-                $scope.host.protozoa      and 'P'  in @allProperties.host or
+                $scope.host.plants        and 'P'  in @allProperties.host or
+                $scope.host.protozoa      and 'Pr' in @allProperties.host or
                 $scope.host.vertebrates   and 'V'  in @allProperties.host
             ) and (
-                # Genome
-                @allProperties.genome == undefined or # TODO: remove this line.
-                $scope.genome.ssDNA       and @allProperties.genome.type == 'ssDNA' or
-                $scope.genome.dsDNA       and @allProperties.genome.type == 'dsDNA' or
-                $scope.genome.ssRNA       and @allProperties.genome.type == 'ssRNA' or
-                $scope.genome.dsRNA       and @allProperties.genome.type == 'dsRNA' or
-                $scope.genome.positive    and @allProperties.genome.positive or
-                $scope.genome.negative    and @allProperties.genome.negative or
-                $scope.genome.ambisense   and @allProperties.genome.ambisense
+                # Genome.
+                @allProperties.genome?.type is undefined or
+                $scope.genome.ssDNAPositive       and @allProperties.genome.type == 'ssDNA' and @allProperties.genome.positive or
+                $scope.genome.ssDNANegative       and @allProperties.genome.type == 'ssDNA' and @allProperties.genome.negative or
+                $scope.genome.ssDNANegativeOrAmbi and @allProperties.genome.type == 'ssDNA' and (@allProperties.genome.negative or @allProperties.genome.ambisense) or
+                $scope.genome.ssDNAAmbi           and @allProperties.genome.type == 'ssDNA' and @allProperties.genome.ambisense or
+                $scope.genome.dsDNA               and @allProperties.genome.type == 'dsDNA' or
+                $scope.genome.dsDNART             and @allProperties.genome.type == 'dsDNA' and @allProperties.genome.RT or
+                $scope.genome.ssRNAPositive       and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.positive or
+                $scope.genome.ssRNARTPositive     and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.RT and @allProperties.genome.positive or
+                $scope.genome.ssRNANegative       and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.negative or
+                $scope.genome.ssRNAAmbi           and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.ambisense or
+                $scope.genome.dsRNA               and @allProperties.genome.type == 'dsRNA'
+            ) and (
+                # Baltimore.
+                @allProperties.genome?.type is undefined or
+                $scope.genome.baltimore[0] and @allProperties.genome.type == 'dsDNA' and not @allProperties.genome.RT or
+                $scope.genome.baltimore[1] and @allProperties.genome.type == 'ssDNA' or
+                $scope.genome.baltimore[2] and @allProperties.genome.type == 'dsRNA' or
+                $scope.genome.baltimore[3] and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.positive and not @allProperties.genome.RT or
+                $scope.genome.baltimore[4] and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.negative or
+                $scope.genome.baltimore[5] and @allProperties.genome.type == 'ssRNA' and @allProperties.genome.positive and @allProperties.genome.RT or
+                $scope.genome.baltimore[6] and @allProperties.genome.type == 'dsDNA' and @allProperties.genome.RT
+            ) and (
+                # Genome organization.
+                @allProperties.genome?.configurationDescription is undefined or
+                $scope.genome.linear    and @allProperties.genome.configurationDescription.toLowerCase().indexOf('linear') > -1 or
+                $scope.genome.circular  and @allProperties.genome.configurationDescription.toLowerCase().indexOf('circular') > -1 or
+                $scope.genome.coiled    and @allProperties.genome.configurationDescription.toLowerCase().indexOf('coiled') > -1 or
+                $scope.genome.segmented and @allProperties.genome.configurationDescription.toLowerCase().indexOf('segments') > -1
+            ) and (
+                # Virion size slider. Return true on any overlap.
+                @allProperties.virionSize[1] >= $scope.morphology.sliderMin and
+                @allProperties.virionSize[0] <= $scope.morphology.sliderMax
+            ) and (
+                # Genome length slider. Return true on any overlap.
+                @allProperties.genome.length[1] >= $scope.genome.sliderMin and
+                @allProperties.genome.length[0] <= $scope.genome.sliderMax
             )
         )
 
@@ -184,7 +224,8 @@ class Node
                       not node.showAccordingToAttributes($scope) or
                       # Always hide unassigned sub-family nodes, they're
                       # never of interest as sub-families are optional and
-                      # the lack of one doesn't indicate anything.
+                      # the lack of one doesn't indicate anything
+                      # interesting.
                       (node.level == SUBFAMILY and node.name == 'Unassigned') or
                       (not $scope.displayUnassignedNodes[0] and node.name == 'Unassigned') or
                       not $scope.taxonomy[node.level])
@@ -211,8 +252,8 @@ class Viroscope
         @root = null
         @selectedNode = null
 
-        width = 600
-        height = 200
+        width = 1050
+        height = 350
 
         # aspect = width / height
         # chart = $ '#viroscope'
@@ -264,25 +305,25 @@ class Viroscope
 
         d3.select(window).on('keydown', @keydown)
 
-    rescale: () =>
+    rescale: =>
         trans = d3.event.translate
         scale = d3.event.scale
         # console.log 'rescale:', trans, scale
         @vis.attr('transform', "translate(#{trans}) scale(#{scale})")
 
-    mousedown: () =>
+    mousedown: =>
         # console.log 'mouse down', @rescale
         # console.log 'zoom', d3.behavior.zoom().on('zoom')
         # Allow panning if nothing is selected.
         @vis.call(d3.behavior.zoom().on('zoom', @rescale))
 
-    mousemove: () =>
+    mousemove: =>
         # console.log 'mouse move'
 
-    mouseup: () =>
+    mouseup: =>
         # console.log 'mouse up'
 
-    mousedown: () =>
+    mousedown: =>
         # console.log 'mouse down'
 
     mouseOffNode: (d) =>
@@ -322,12 +363,14 @@ class Viroscope
     dragstart: (d) ->
         # d3.select(this).classed('fixed', d.fixed = true)
 
-    keydown: () =>
+    keydown: =>
         # console.log 'key:', d3.event.keyCode
         if not @selectedNode
             return
 
         switch d3.event.keyCode
+            when 65 # a = all properties
+                console.log 'Selected node', @selectedNode
             when 67 # c = click
                 child.invertHidden() for child in @selectedNode.children
                 @refresh()
@@ -354,12 +397,9 @@ class Viroscope
         @$scope.counts = result
 
     refresh: (data, $scope) =>
-        console.log 'Refresh'
         if data
             @root = data
             @$scope = $scope
-            console.log 'Root', @root
-            console.log 'Scope', @$scope
         f = @root.flatten @$scope
         nodes = f.nodes
         links = f.links
@@ -404,17 +444,6 @@ class Viroscope
 
         @force.start()
 
-addProperties = (properties, tree) ->
-    recurse = (propertyNode, treeNode) ->
-        treeNode.properties = propertyNode.properties
-        if propertyNode.children
-            if not treeNode.children
-                throw new ViroscopeException("Tree ran out of children before properties did")
-            for name of propertyNode.children
-                if name not of treeNode.children
-                    throw new ViroscopeException("Could not find name #{name} in tree")
-                recurse propertyNode.children[name], treeNode.children[name]
-    recurse properties, tree
 
 convertToChildLists = (tree) ->
     # In each node of tree, children are kept in an object keyed by name.
@@ -422,21 +451,22 @@ convertToChildLists = (tree) ->
     # each object. This makes for easier processing in the Viroscope class.
     convertNodeToList = (name, node, level, parent) ->
         properties = node.properties ? {}
-        if node.typeSpecies?
-            properties.typeSpecies = node.typeSpecies
-        result = new Node(name, parent, properties, level)
-        for childName of node.children
-            result.addChild(
-                convertNodeToList(childName, node.children[childName], level + 1, result))
-        result
+        newNode = new Node(name, parent, properties, level)
+        if level != SPECIES
+            nextLevel = LEVELS[level + 1]
+            for childName of node[nextLevel]
+                newNode.addChild(
+                    convertNodeToList(childName, node[nextLevel][childName], level + 1, newNode))
+        newNode
     convertNodeToList 'root', tree, 0, null
 
 initializeScope = ($scope) ->
     # root, order, family, subfamily, genus, species.
     # In $scope.taxonomy, values are true if that level of the
     # taxonomy should be shown.
-    $scope.taxonomy = [false, true, true, false, false, false]
-    $scope.displayUnassignedNodes = [false]
+    $scope.taxonomy = [true, true, true, true, false, false]
+    $scope.searchText = ''
+    $scope.displayUnassignedNodes = [true]
     $scope.infoNode = null
     $scope.infoNodeLocked = false
     $scope.counts = [0, 0, 0, 0, 0, 0]
@@ -463,6 +493,10 @@ initializeScope = ($scope) ->
         spherical: true
         tail: true
         twoTailed: true
+        minWidth: 1 # Arbitrary - set after we receive all data.
+        maxWidth: 100 # Arbitrary - set after we receive all data.
+        sliderMin: 1 # Arbitrary - set after we receive all data.
+        sliderMax: 100 # Arbitrary - set after we receive all data.
     $scope.envelope =
         enveloped: true
         notEnveloped: true
@@ -472,16 +506,31 @@ initializeScope = ($scope) ->
         bacteria: true
         fungi: true
         invertebrates: true
+        plants: true
         protozoa: true
         vertebrates: true
     $scope.genome =
-        ssDNA: true
+        linear: true
+        circular: true
+        coiled: true
+        segmented: true
+        ssDNAPositive: true
+        ssDNANegative: true
+        ssDNANegativeOrAmbi: true
+        ssDNAAmbi: true
         dsDNA: true
-        ssRNA: true
+        dsDNART: true
+        ssRNAPositive: true
+        ssRNARTPositive: true
+        ssRNANegative: true
+        ssRNAAmbi: true
         dsRNA: true
-        positive: true
-        negative: true
-        ambisense: true
+        baltimore: [true, true, true, true, true, true, true]
+        minWidth: 1 # Arbitrary - set after we receive all data.
+        maxWidth: 100 # Arbitrary - set after we receive all data.
+        sliderMin: 1 # Arbitrary - set after we receive all data.
+        sliderMax: 100 # Arbitrary - set after we receive all data.
+
     $scope.setAll = (attr, value) ->
         for name of $scope[attr]
             $scope[attr][name] = value
@@ -490,24 +539,34 @@ initializeScope = ($scope) ->
     $scope.unlockInfoNode = ->
         $scope.infoNodeLocked = false
 
-    $scope.searchText = ''
-    $scope.search = ->
-        console.log 'searching for', $scope.searchText
-        $scope.viroscope.refresh()
-
 angular.module('viroscope-app')
-    .controller('MainCtrl', ($scope, $http) ->
+    .controller 'MainCtrl', ($scope, $http) ->
 
         $scope.viroscope = new Viroscope
         initializeScope $scope
 
-        d = $.when $.getJSON('/api/taxonomy'), $.getJSON('/api/properties')
-        d.done (taxonomyXHR, propertiesXHR) ->
-            taxonomy = taxonomyXHR[0]
-            properties = propertiesXHR[0]
-            addProperties properties, taxonomy
+        $http.get('/api/taxonomy').success (taxonomy) ->
             root = convertToChildLists taxonomy
+            console.log 'root', root
             root.addMorphologyKeywords()
+            root.computeAllProperties()
             $scope._converted = root # Used in testing
+
+            $scope.morphology.minWidth = $scope.morphology.sliderMin = root.allProperties.virionSize[0]
+            $scope.morphology.maxWidth = $scope.morphology.sliderMax = root.allProperties.virionSize[1]
+
+            $scope.genome.minWidth = $scope.genome.sliderMin = root.allProperties.genome.length[0]
+            $scope.genome.maxWidth = $scope.genome.sliderMax = root.allProperties.genome.length[1]
+
+            # Watch the morphology slider.
+            $scope.$watch 'morphology.sliderMax', ->
+                $scope.viroscope.refresh()
+            $scope.$watch 'morphology.sliderMin', ->
+                $scope.viroscope.refresh()
+            # Watch the genome length slider.
+            $scope.$watch 'genome.sliderMax', ->
+                $scope.viroscope.refresh()
+            $scope.$watch 'genome.sliderMin', ->
+                $scope.viroscope.refresh()
+
             $scope.viroscope.refresh root, $scope
-    )

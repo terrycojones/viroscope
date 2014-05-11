@@ -1,14 +1,20 @@
 <div ng-model="infoNode">
   <div ng-show="infoNode">
     <div class="info-box">
-      <span class="virus-name">{{infoNode.format().ancestry()}}</span><br/><br/>
+      <span class="virus-name">{{infoNode.format.ancestry()}}</span><br/><br/>
 
-      <span class="info-title">Morphology:</span> {{infoNode.format().morphology()}}<br/>
-      <span class="info-title">Genome type:</span> {{infoNode.format().genome()}}<br/>
-      <span class="info-title">Genome size:</span> {{infoNode.format().genomeSize()}}<br/>
-      <span class="info-title">Enveloped:</span> {{infoNode.format().envelope()}}<br/>
-      <span class="info-title">Virion size:</span> {{infoNode.format().virionSize()}}<br/>
-      <span class="info-title">Host:</span> {{infoNode.format().host()}}<br/>
+      <span class="info-title">Virion (nm):</span> {{infoNode.format.virionDescription()}}<br/>
+      <span class="info-title">Morphology:</span> {{infoNode.format.morphology()}}<br/>
+      <span class="info-title">Envelope:</span> {{infoNode.format.envelope()}}<br/>
+      <span class="info-title">Genome length (kb):</span> {{infoNode.format.genomeLength()}}<br/>
+      <span class="info-title">Genome type:</span> {{infoNode.format.genome()}}<br/>
+      <span class="info-title">Genome org:</span> {{infoNode.format.genomeConfiguration()}}<br/>
+      <span class="info-title">Host:</span> {{infoNode.format.host()}}<br/>
+
+      <!-- Why do these cause Angular to go nuts? -->
+      <!-- <span class="info-title">Links:</span> <span ng-repeat="link in infoNode.format.links()" ng-bind-html="link"><a href="{{link.url}}">{{link.title}}</a> </span><br/> -->
+      <!-- <span class="info-title">Links:</span> {{infoNode.format.links()}} -->
+      <!-- <span ng-repeat="link in infoNode.format.links()"> {{link.title}} </span><br/> -->
 
       <div ng-show="infoNodeLocked">
         <br/>

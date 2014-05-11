@@ -4,12 +4,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
           Taxonomy
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
+    <div id="collapse1" class="panel-collapse collapse in">
       <div class="panel-body">
         <input type="checkbox" ng-model="taxonomy[0]" ng-change="viroscope.refresh()"> Root
         (<span ng-model="counts">{{counts[0]}}</span>)<br/>
@@ -30,16 +30,34 @@
     </div>
   </div>
 
-  <!-- Morphology -->
+  <!-- Virion size -->
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          Morphology
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+          Virion size
         </a>
       </h4>
     </div>
-    <div id="collapseTwo" class="panel-collapse collapse">
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">
+        <!-- Slider -->
+        Virion min/max dimension (nm)<br/>
+        <div range-slider min="morphology.minWidth" max="morphology.maxWidth" model-min="morphology.sliderMin" model-max="morphology.sliderMax"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Virion morphology -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+          Virion morphology
+        </a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
       <div class="panel-body">
         <!-- TODO: Metaviridae -->
         <input type="checkbox" ng-model="morphology.allantoid"         ng-change="viroscope.refresh()"> Allantoid<br/>
@@ -77,12 +95,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
           Envelope
         </a>
       </h4>
     </div>
-    <div id="collapseThree" class="panel-collapse collapse">
+    <div id="collapse4" class="panel-collapse collapse">
       <div class="panel-body">
         <input type="checkbox" ng-model="envelope.enveloped"          ng-change="viroscope.refresh()"> Envelope<br/>
         <input type="checkbox" ng-model="envelope.notEnveloped"       ng-change="viroscope.refresh()"> No envelope<br/>
@@ -90,24 +108,58 @@
     </div>
   </div>
 
-  <!-- Genome -->
+  <!-- Genome length -->
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-          Genome
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+          Genome length
         </a>
       </h4>
     </div>
-    <div id="collapseFour" class="panel-collapse collapse">
+    <div id="collapse5" class="panel-collapse collapse">
       <div class="panel-body">
-        <input type="checkbox" ng-model="genome.ssDNA" ng-change="viroscope.refresh()"> ssDNA<br/>
+        <!-- Slider -->
+        Genome length (kb)<br/>
+        <div range-slider min="genome.minWidth" max="genome.maxWidth" model-min="genome.sliderMin" model-max="genome.sliderMax"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Genome class -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+          Genome class
+        </a>
+      </h4>
+    </div>
+    <div id="collapse6" class="panel-collapse collapse">
+      <div class="panel-body">
+        ICTV
+        <br/>
+        <input type="checkbox" ng-model="genome.ssDNAPositive" ng-change="viroscope.refresh()"> ssDNA (+)<br/>
+        <input type="checkbox" ng-model="genome.ssDNANegative" ng-change="viroscope.refresh()"> ssDNA (-)<br/>
+        <input type="checkbox" ng-model="genome.ssDNANegativeOrAmbi" ng-change="viroscope.refresh()"> ssDNA (-) or (+/-)<br/>
+        <input type="checkbox" ng-model="genome.ssDNAAmbi" ng-change="viroscope.refresh()"> ssDNA (+/-)<br/>
         <input type="checkbox" ng-model="genome.dsDNA" ng-change="viroscope.refresh()"> dsDNA<br/>
-        <input type="checkbox" ng-model="genome.ssRNA" ng-change="viroscope.refresh()"> ssRNA<br/>
+        <input type="checkbox" ng-model="genome.dsDNART" ng-change="viroscope.refresh()"> dsDNA RT<br/>
+        <input type="checkbox" ng-model="genome.ssRNAPositive" ng-change="viroscope.refresh()"> ssRNA (+)<br/>
+        <input type="checkbox" ng-model="genome.ssRNARTPositive" ng-change="viroscope.refresh()"> ssRNA (+) RT<br/>
+        <input type="checkbox" ng-model="genome.ssRNANegative" ng-change="viroscope.refresh()"> ssRNA (-)<br/>
+        <input type="checkbox" ng-model="genome.ssRNAAmbi" ng-change="viroscope.refresh()"> ssRNA (+/-)<br/>
         <input type="checkbox" ng-model="genome.dsRNA" ng-change="viroscope.refresh()"> dsRNA<br/>
-        <input type="checkbox" ng-model="genome.positive" ng-change="viroscope.refresh()"> Positive sense<br/>
-        <input type="checkbox" ng-model="genome.negative" ng-change="viroscope.refresh()"> Negative sense<br/>
-        <input type="checkbox" ng-model="genome.ambisense" ng-change="viroscope.refresh()"> Ambisense<br/>
+        <br/>
+        Baltimore
+        <br/>
+        <input type="checkbox" ng-model="genome.baltimore[0]" ng-change="viroscope.refresh()"> 1: dsDNA (+/-)<br/>
+        <input type="checkbox" ng-model="genome.baltimore[1]" ng-change="viroscope.refresh()"> 2: ssDNA (+)<br/>
+        <input type="checkbox" ng-model="genome.baltimore[2]" ng-change="viroscope.refresh()"> 3: dsRNA (+/-)<br/>
+        <input type="checkbox" ng-model="genome.baltimore[3]" ng-change="viroscope.refresh()"> 4: ssRNA (+)<br/>
+        <input type="checkbox" ng-model="genome.baltimore[4]" ng-change="viroscope.refresh()"> 5: ssRNA (-)<br/>
+        <input type="checkbox" ng-model="genome.baltimore[5]" ng-change="viroscope.refresh()"> 6: ssRNA (+) RT<br/>
+        <input type="checkbox" ng-model="genome.baltimore[6]" ng-change="viroscope.refresh()"> 7: dsDNA (+/-) RT<br/>
         <br/>
         <div class="btn-group btn-group-xs">
           <button type="button" class="btn btn-default" ng-click="setAll('genome', true)">Select all</button>
@@ -117,22 +169,47 @@
     </div>
   </div>
 
-  <!-- Host -->
+  <!-- Genome organization -->
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-          Host
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+          Genome organization
         </a>
       </h4>
     </div>
-    <div id="collapseFive" class="panel-collapse collapse">
+    <div id="collapse7" class="panel-collapse collapse">
+      <div class="panel-body">
+        <input type="checkbox" ng-model="genome.linear" ng-change="viroscope.refresh()"> Linear<br/>
+        <input type="checkbox" ng-model="genome.circular" ng-change="viroscope.refresh()"> Circular<br/>
+        <input type="checkbox" ng-model="genome.coiled" ng-change="viroscope.refresh()"> Coiled<br/>
+        <input type="checkbox" ng-model="genome.segmented" ng-change="viroscope.refresh()"> Segmented<br/>
+        <br/>
+        <div class="btn-group btn-group-xs">
+          <button type="button" class="btn btn-default" ng-click="setAll('genome', true)">Select all</button>
+          <button type="button" class="btn btn-default" ng-click="setAll('genome', false)">Select none</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Host range -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+          Host range
+        </a>
+      </h4>
+    </div>
+    <div id="collapse8" class="panel-collapse collapse">
       <div class="panel-body">
         <input type="checkbox" ng-model="host.algae" ng-change="viroscope.refresh()"> Algae<br/>
         <input type="checkbox" ng-model="host.archaea" ng-change="viroscope.refresh()"> Archaea<br/>
         <input type="checkbox" ng-model="host.bacteria" ng-change="viroscope.refresh()"> Bacteria<br/>
         <input type="checkbox" ng-model="host.fungi" ng-change="viroscope.refresh()"> Fungi<br/>
         <input type="checkbox" ng-model="host.invertebrates" ng-change="viroscope.refresh()"> Invertebrates<br/>
+        <input type="checkbox" ng-model="host.plants" ng-change="viroscope.refresh()"> Plants<br/>
         <input type="checkbox" ng-model="host.protozoa" ng-change="viroscope.refresh()"> Protozoa<br/>
         <input type="checkbox" ng-model="host.vertebrates" ng-change="viroscope.refresh()"> Vertebrates<br/>
         <br/>
@@ -144,20 +221,21 @@
     </div>
   </div>
 
-  <!-- Display -->
+  <!-- Display
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
           Display
         </a>
       </h4>
     </div>
-    <div id="collapseSix" class="panel-collapse collapse">
+    <div id="collapseSeven" class="panel-collapse collapse">
       <div class="panel-body">
-        Misc... baltimore type
+        Tree layout, etc.
       </div>
     </div>
   </div>
+  -->
 
 </div>

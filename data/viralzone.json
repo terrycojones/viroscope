@@ -1,0 +1,26 @@
+{
+    "order": {
+        "Herpesvirales": {
+            "family": {
+                "Herpesviridae": {
+                    "sub-family": {
+                        "Alphaherpesvirinae": {
+                            "genus": {
+                                "Simplexvirus": {
+                                    "properties": {
+                                        "links": [
+                                            {
+                                                "title": "viralzone",
+                                                "url": "http://viralzone.expasy.org/all_by_species/178.html"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

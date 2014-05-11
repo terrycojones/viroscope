@@ -12,3 +12,4 @@ lib/controllers/api.js
 lib/controllers/api.js.map
 lib/controllers/data.js
 lib/controllers/data.js.map
+data/taxonomy.json
