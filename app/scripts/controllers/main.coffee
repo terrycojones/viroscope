@@ -198,18 +198,18 @@ class Node
             ) and (
                 # Genome organization.
                 @allProperties.genome?.configurationDescription is undefined or
-                $scope.genome.linear    and @allProperties.genome.configurationDescription.toLowerCase().indexOf('linear') > -1 or
-                $scope.genome.circular  and @allProperties.genome.configurationDescription.toLowerCase().indexOf('circular') > -1 or
-                $scope.genome.coiled    and @allProperties.genome.configurationDescription.toLowerCase().indexOf('coiled') > -1 or
-                $scope.genome.segmented and @allProperties.genome.configurationDescription.toLowerCase().indexOf('segments') > -1
+                $scope.genomeOrganization.linear    and @allProperties.genome.configurationDescription.toLowerCase().indexOf('linear') > -1 or
+                $scope.genomeOrganization.circular  and @allProperties.genome.configurationDescription.toLowerCase().indexOf('circular') > -1 or
+                $scope.genomeOrganization.coiled    and @allProperties.genome.configurationDescription.toLowerCase().indexOf('coiled') > -1 or
+                $scope.genomeOrganization.segmented and @allProperties.genome.configurationDescription.toLowerCase().indexOf('segments') > -1
             ) and (
                 # Virion size slider. Return true on any overlap.
-                @allProperties.virionSize[1] >= $scope.morphology.sliderMin and
-                @allProperties.virionSize[0] <= $scope.morphology.sliderMax
+                @allProperties.virionSize[1] >= $scope.morphologySlider.sliderMin and
+                @allProperties.virionSize[0] <= $scope.morphologySlider.sliderMax
             ) and (
                 # Genome length slider. Return true on any overlap.
-                @allProperties.genome.length[1] >= $scope.genome.sliderMin and
-                @allProperties.genome.length[0] <= $scope.genome.sliderMax
+                @allProperties.genome.length[1] >= $scope.genomeSlider.sliderMin and
+                @allProperties.genome.length[0] <= $scope.genomeSlider.sliderMax
             )
         )
 
@@ -493,10 +493,12 @@ initializeScope = ($scope) ->
         spherical: true
         tail: true
         twoTailed: true
-        minWidth: 1 # Arbitrary - set after we receive all data.
-        maxWidth: 100 # Arbitrary - set after we receive all data.
-        sliderMin: 1 # Arbitrary - set after we receive all data.
-        sliderMax: 100 # Arbitrary - set after we receive all data.
+    $scope.morphologySlider =
+        # The values here are arbitrary. They are set properly after we receive all data.
+        minWidth: 1
+        maxWidth: 100
+        sliderMin: 1
+        sliderMax: 100
     $scope.envelope =
         enveloped: true
         notEnveloped: true
@@ -509,11 +511,12 @@ initializeScope = ($scope) ->
         plants: true
         protozoa: true
         vertebrates: true
-    $scope.genome =
+    $scope.genomeOrganization =
         linear: true
         circular: true
         coiled: true
         segmented: true
+    $scope.genome =
         ssDNAPositive: true
         ssDNANegative: true
         ssDNANegativeOrAmbi: true
@@ -526,10 +529,19 @@ initializeScope = ($scope) ->
         ssRNAAmbi: true
         dsRNA: true
         baltimore: [true, true, true, true, true, true, true]
-        minWidth: 1 # Arbitrary - set after we receive all data.
-        maxWidth: 100 # Arbitrary - set after we receive all data.
-        sliderMin: 1 # Arbitrary - set after we receive all data.
-        sliderMax: 100 # Arbitrary - set after we receive all data.
+    $scope.genomeSlider =
+        # The values here are arbitrary. They are set properly after we receive all data.
+        minWidth: 1
+        maxWidth: 100
+        sliderMin: 1
+        sliderMax: 100
+
+    $scope.setAllGenome = (value) ->
+        for name of $scope.genome
+            if name != 'baltimore'
+                $scope.genome[name] = value
+        $scope.genome.baltimore = [value, value, value, value, value, value, value]
+        $scope.viroscope.refresh()
 
     $scope.setAll = (attr, value) ->
         for name of $scope[attr]
@@ -552,21 +564,21 @@ angular.module('viroscope-app')
             root.computeAllProperties()
             $scope._converted = root # Used in testing
 
-            $scope.morphology.minWidth = $scope.morphology.sliderMin = root.allProperties.virionSize[0]
-            $scope.morphology.maxWidth = $scope.morphology.sliderMax = root.allProperties.virionSize[1]
+            $scope.morphologySlider.minWidth = $scope.morphologySlider.sliderMin = root.allProperties.virionSize[0]
+            $scope.morphologySlider.maxWidth = $scope.morphologySlider.sliderMax = root.allProperties.virionSize[1]
 
-            $scope.genome.minWidth = $scope.genome.sliderMin = root.allProperties.genome.length[0]
-            $scope.genome.maxWidth = $scope.genome.sliderMax = root.allProperties.genome.length[1]
+            $scope.genomeSlider.minWidth = $scope.genomeSlider.sliderMin = root.allProperties.genome.length[0]
+            $scope.genomeSlider.maxWidth = $scope.genomeSlider.sliderMax = root.allProperties.genome.length[1]
 
             # Watch the morphology slider.
-            $scope.$watch 'morphology.sliderMax', ->
+            $scope.$watch 'morphologySlider.sliderMax', ->
                 $scope.viroscope.refresh()
-            $scope.$watch 'morphology.sliderMin', ->
+            $scope.$watch 'morphologySlider.sliderMin', ->
                 $scope.viroscope.refresh()
             # Watch the genome length slider.
-            $scope.$watch 'genome.sliderMax', ->
+            $scope.$watch 'genomeSlider.sliderMax', ->
                 $scope.viroscope.refresh()
-            $scope.$watch 'genome.sliderMin', ->
+            $scope.$watch 'genomeSlider.sliderMin', ->
                 $scope.viroscope.refresh()
 
             $scope.viroscope.refresh root, $scope

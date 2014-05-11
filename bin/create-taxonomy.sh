@@ -15,7 +15,4 @@ fi
 ./bin/010-host-propagate-up.coffee |
 ./bin/010-virion-size-propagate-up.coffee > data/taxonomy.json
 
-if [ -d dist ]
-then
-    cp data/taxonomy.json dist
-fi
+test -d dist && cp data/taxonomy.json dist

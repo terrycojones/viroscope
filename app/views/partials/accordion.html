@@ -43,7 +43,7 @@
       <div class="panel-body">
         <!-- Slider -->
         Virion min/max dimension (nm)<br/>
-        <div range-slider min="morphology.minWidth" max="morphology.maxWidth" model-min="morphology.sliderMin" model-max="morphology.sliderMax"></div>
+        <div range-slider min="morphologySlider.minWidth" max="morphologySlider.maxWidth" model-min="morphologySlider.sliderMin" model-max="morphologySlider.sliderMax"></div>
       </div>
     </div>
   </div>
@@ -121,7 +121,7 @@
       <div class="panel-body">
         <!-- Slider -->
         Genome length (kb)<br/>
-        <div range-slider min="genome.minWidth" max="genome.maxWidth" model-min="genome.sliderMin" model-max="genome.sliderMax"></div>
+        <div range-slider min="genomeSlider.minWidth" max="genomeSlider.maxWidth" model-min="genomeSlider.sliderMin" model-max="genomeSlider.sliderMax"></div>
       </div>
     </div>
   </div>
@@ -162,8 +162,8 @@
         <input type="checkbox" ng-model="genome.baltimore[6]" ng-change="viroscope.refresh()"> 7: dsDNA (+/-) RT<br/>
         <br/>
         <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-default" ng-click="setAll('genome', true)">Select all</button>
-          <button type="button" class="btn btn-default" ng-click="setAll('genome', false)">Select none</button>
+          <button type="button" class="btn btn-default" ng-click="setAllGenome(true)">Select all</button>
+          <button type="button" class="btn btn-default" ng-click="setAllGenome(false)">Select none</button>
         </div>
       </div>
     </div>
@@ -180,14 +180,14 @@
     </div>
     <div id="collapse7" class="panel-collapse collapse">
       <div class="panel-body">
-        <input type="checkbox" ng-model="genome.linear" ng-change="viroscope.refresh()"> Linear<br/>
-        <input type="checkbox" ng-model="genome.circular" ng-change="viroscope.refresh()"> Circular<br/>
-        <input type="checkbox" ng-model="genome.coiled" ng-change="viroscope.refresh()"> Coiled<br/>
-        <input type="checkbox" ng-model="genome.segmented" ng-change="viroscope.refresh()"> Segmented<br/>
+        <input type="checkbox" ng-model="genomeOrganization.linear" ng-change="viroscope.refresh()"> Linear<br/>
+        <input type="checkbox" ng-model="genomeOrganization.circular" ng-change="viroscope.refresh()"> Circular<br/>
+        <input type="checkbox" ng-model="genomeOrganization.coiled" ng-change="viroscope.refresh()"> Coiled<br/>
+        <input type="checkbox" ng-model="genomeOrganization.segmented" ng-change="viroscope.refresh()"> Segmented<br/>
         <br/>
         <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-default" ng-click="setAll('genome', true)">Select all</button>
-          <button type="button" class="btn btn-default" ng-click="setAll('genome', false)">Select none</button>
+          <button type="button" class="btn btn-default" ng-click="setAll('genomeOrganization', true)">Select all</button>
+          <button type="button" class="btn btn-default" ng-click="setAll('genomeOrganization', false)">Select none</button>
         </div>
       </div>
     </div>
