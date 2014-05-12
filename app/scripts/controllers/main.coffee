@@ -20,7 +20,8 @@ class Node
         B: 'Bacteria'
         F: 'Fungi'
         I: 'Invertebrates'
-        P: 'Protozoa'
+        P: 'Plants'
+        Pr: 'Protozoa'
         V: 'Vertebrates'
 
     constructor: (@name, @parent, @properties, @level) ->
@@ -44,9 +45,18 @@ class Node
                     sense.push '-'
                 if @allProperties.genome.ambisense
                     sense.push '+/-'
-                @allProperties.genome.type + (if sense.length then ' (' + sense.join(', ') + ')' else '')
+                @allProperties.genome.type + (if @allProperties.genome.RT then '-RT' else '') + (if sense.length then ' (' + sense.join(', ') + ')' else '')
             envelope: =>
-                if @allProperties.envelope then 'yes' else 'no'
+                switch @allProperties.envelope
+                    when 'N/A'
+                        return 'N/A'
+                    when 'both'
+                        return 'both'
+                    when true
+                        return 'yes'
+                    when false
+                        return 'no'
+                return ''
             morphology: =>
                 # TODO: Fix the case where there is no morphology.
                 return @allProperties.morphology ? ''
@@ -139,7 +149,9 @@ class Node
                 # Envelope.
                 @allProperties.envelope is undefined or
                 $scope.envelope.enveloped and @allProperties.envelope or
-                $scope.envelope.notEnveloped and not @allProperties.envelope
+                $scope.envelope.notEnveloped and @allProperties.envelope == false or
+                $scope.envelope.both and @allProperties.envelope == 'both' or
+                $scope.envelope.NA and @allProperties.envelope == 'N/A'
             ) and (
                 # Morphology.
                 @allProperties.morphologyKeywords is undefined or
@@ -153,6 +165,7 @@ class Node
                 $scope.morphology.icosahedral       and @allProperties.morphologyKeywords.indexOf('icosahedral') > -1 or
                 $scope.morphology.icosahedralHead   and @allProperties.morphologyKeywords.indexOf('icosahedral head') > -1 or
                 $scope.morphology.icosahedralCore   and @allProperties.morphologyKeywords.indexOf('icosahedral core') > -1 or
+                $scope.morphology.intracellular     and @allProperties.morphologyKeywords.indexOf('intracellular') > -1 or
                 $scope.morphology.rnp               and @allProperties.morphologyKeywords.indexOf('RNP complex') > -1 or
                 $scope.morphology.lemonShaped       and @allProperties.morphologyKeywords.indexOf('lemon-shaped') > -1 or
                 $scope.morphology.ovoidal           and @allProperties.morphologyKeywords.indexOf('ovoidal') > -1 or
@@ -344,6 +357,10 @@ class Viroscope
             @refresh()
 
     keydown: =>
+        if d3.event.keyCode == 191 # / = focus on search box.
+            d3.event.preventDefault()
+            document.getElementById('search-input').focus()
+
         if not @selectedNode
             return
 
@@ -463,6 +480,7 @@ initializeScope = ($scope) ->
         icosahedral: true
         icosahedralHead: true
         icosahedralCore: true
+        intracellular: true
         rnp: true
         lemonShaped: true
         ovoidal: true
@@ -484,6 +502,8 @@ initializeScope = ($scope) ->
     $scope.envelope =
         enveloped: true
         notEnveloped: true
+        both: true
+        NA: true
     $scope.host =
         algae: true
         archaea: true
@@ -544,7 +564,7 @@ angular.module('viroscope-app')
 
         $http.get('/api/taxonomy').success (taxonomy) ->
             root = convertToChildLists taxonomy
-            console.log 'root', root
+            # console.log 'root', root
             root.addMorphologyKeywords()
             root.computeAllProperties()
             $scope._converted = root # Used in testing

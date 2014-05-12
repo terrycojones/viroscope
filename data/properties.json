@@ -624,632 +624,600 @@
                 },
                 "Asfarviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [165, 190],
+                            "lengthDescription": "165-190",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "icosahedral",
+                        "virionDescription": "200-250",
+                        "host": ["V", "I"]
                     }
                 },
                 "Astroviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [6, 8],
+                            "lengthDescription": "6-8",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "28-30",
                         "host": ["V"]
                     }
                 },
                 "Avsunviroidae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "1 circular (non-coding) segment",
+                            "length": [0.25, 0.4],
+                            "lengthDescription": "0.25-0.4",
                             "negative": false,
                             "positive": false,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "unencapsidated; rod-like",
+                        "virionDescription": "< 50",
+                        "host": ["P"]
                     }
                 },
                 "Baculoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular supercoiled genome",
+                            "length": [80, 180],
+                            "lengthDescription": "80-180",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "rod-shaped",
+                        "virionDescription": "30-60 x 250-300",
+                        "host": ["I"]
                     }
                 },
                 "Barnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [4, 4],
+                            "lengthDescription": "4",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "bacilliform",
+                        "virionDescription": "18-20 x 48-53",
+                        "host": ["F"]
                     }
                 },
                 "Bicaudaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular genome",
+                            "length": [63, 63],
+                            "lengthDescription": "63",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "lemon-shaped, two-tailed",
+                        "virionDescription": "80 x 120-400",
+                        "host": ["Ar"]
                     }
                 },
                 "Bidnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
-                            "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "ambisense": true,
+                            "configurationDescription": "2 linear segments",
+                            "length": [12.5, 12.5],
+                            "lengthDescription": "6, 6.5",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "ssDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "25",
+                        "host": ["I"]
                     }
                 },
                 "Birnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "2 linear segments",
+                            "length": [6.5, 6.5],
+                            "lengthDescription": "3.5, 3",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "65",
+                        "host": ["V", "I"]
                     }
                 },
                 "Bromoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "3 linear segments",
+                            "length": [13, 19],
+                            "lengthDescription": "monopartite: 13-19; bipartite: 8-9, 8-9; tripartite: 8, 5.3, 3.9",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral, bacilliform",
+                        "virionDescription": "icosahedral: 25-35; bacilliform: 18-26 x 30-85",
+                        "host": ["P"]
                     }
                 },
                 "Bunyaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
-                            "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "ambisense": true,
+                            "configurationDescription": "3 linear segments",
+                            "length": [11.26, 20.7],
+                            "lengthDescription": "6.4-12.3, 3.9-5.4, 0.96-3.0",
                             "negative": false,
                             "positive": false,
                             "type": "ssRNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "spherical",
+                        "virionDescription": "80-120",
+                        "host": ["V", "I", "P"]
                     }
                 },
                 "Caliciviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [7, 8],
+                            "lengthDescription": "7-8",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "35-40",
                         "host": ["V"]
                     }
                 },
                 "Carmotetraviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [6.1, 6.1],
+                            "lengthDescription": "6.1",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "40",
+                        "host": ["I"]
                     }
                 },
                 "Caulimoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "non-covalently closed circular genome",
+                            "length": [7.2, 9.2],
+                            "lengthDescription": "7.2-9.2",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "RT": true,
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral, bacilliform",
+                        "virionDescription": "icosahedral: 50-52; bacilliform: 30 x 130-150",
                         "host": ["V"]
                     }
                 },
                 "Chrysoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "4 linear segments",
+                            "length": [14.7, 14.7],
+                            "lengthDescription": "3.6, 3.2, 3.0, 2.9",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "35-40",
+                        "host": ["F"]
                     }
                 },
                 "Circoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
-                            "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
-                            "negative": false,
+                            "ambisense": true,
+                            "configurationDescription": "circular genome",
+                            "length": [1.7, 2.3],
+                            "lengthDescription": "1.7-2.3",
+                            "negative": true,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "ssDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "12-27",
                         "host": ["V"]
                     }
                 },
                 "Clavaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular genome",
+                            "length": [5.3, 5.3],
+                            "lengthDescription": "5.3",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "bacilliform",
+                        "virionDescription": "140 x 20",
+                        "host": ["Ar"]
                     }
                 },
                 "Closteroviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "1-3 linear segments",
+                            "length": [13, 19],
+                            "lengthDescription": "monopartite: 13-19; bipartite: 8-9, 8-9; tripartite: 8, 5.3, 3.9",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "filamentous",
+                        "virionDescription": "12 x 650-2000",
+                        "host": ["P"]
                     }
                 },
                 "Corticoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular supercoiled genome",
+                            "length": [10, 10],
+                            "lengthDescription": "10",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "60",
+                        "host": ["B"]
                     }
                 },
                 "Cystoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "3 linear segments",
+                            "length": [12.6, 15],
+                            "lengthDescription": "6.4-7.1, 3.6-4.7, 2.6-3.2",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "spherical",
+                        "virionDescription": "85",
+                        "host": ["B"]
                     }
                 },
                 "Endornaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [14, 18],
+                            "lengthDescription": "14-18",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": "N/A",
+                        "morphology": "pleomorphic RNA-containing vesicles",
+                        "virionDescription": "no virions; viral RNA contained in cytoplasmic vesicles",
+                        "host": ["Al", "F", "P"]
                     }
                 },
                 "Flaviviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [9, 13],
+                            "lengthDescription": "9-13",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "spherical",
+                        "virionDescription": "40-60",
+                        "host": ["V", "I"]
                     }
                 },
                 "Fuselloviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular supercoiled genome",
+                            "length": [15, 18],
+                            "lengthDescription": "15-18",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "lemon-shaped",
+                        "virionDescription": "55-60 x 80-100",
+                        "host": ["Ar"]
                     }
                 },
                 "Geminiviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
-                            "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "ambisense": true,
+                            "configurationDescription": "1 or 2 circular segments",
+                            "length": [2.5, 6],
+                            "lengthDescription": "2.5-3 per segment",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "ssDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "22 x 38",
+                        "host": ["P"]
                     }
                 },
                 "Globuloviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [21, 28],
+                            "lengthDescription": "21-28",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "spherical",
+                        "virionDescription": "70-100",
+                        "host": ["Ar"]
                     }
                 },
                 "Guttaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular genome",
+                            "length": [20, 20],
+                            "lengthDescription": "20",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "droplet-shaped",
+                        "virionDescription": "75-90 x 110-185",
+                        "host": ["Ar"]
                     }
                 },
                 "Hepadnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "non-covalently closed circular genome",
+                            "length": [3, 4],
+                            "lengthDescription": "3-4",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "RT": true,
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "morphology": "spherical",
+                        "virionDescription": "42-50",
                         "host": ["V"]
                     }
                 },
                 "Hepeviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [6.6, 7.2],
+                            "lengthDescription": "6.6-7.2",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "27-34",
                         "host": ["V"]
                     }
                 },
                 "Hypoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [9, 13],
+                            "lengthDescription": "9-13",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": "N/A",
+                        "morphology": "pleomorphic RNA-containing vesicles",
+                        "virionDescription": "no virions; viral RNA contained in cytoplasmic vesicles",
+                        "host": ["F"]
                     }
                 },
                 "Hytrosaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular genome",
+                            "length": [120, 190],
+                            "lengthDescription": "120-190",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "rod-shaped",
+                        "virionDescription": "65-100 x 550-1000",
+                        "host": ["I"]
                     }
                 },
                 "Inoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular genome",
+                            "length": [4.5, 12.4],
+                            "lengthDescription": "inoviruses: 5.8-12.4; plectroviruses: 4.5-8.2",
                             "negative": false,
-                            "positive": false,
-                            "type": "ssRNA"
+                            "positive": true,
+                            "type": "ssDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "inoviruses: filamentous; plectroviruses: rod-shaped",
+                        "virionDescription": "inoviruses: 7 x 700-3500; plectroviruses: 15 x 200-400",
                         "host": ["V"]
                     }
                 },
                 "Iridoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [140, 303],
+                            "lengthDescription": "140-303",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": "both",
+                        "morphology": "icosahedral, spherical",
+                        "virionDescription": "120-350",
+                        "host": ["V", "I"]
                     }
                 },
                 "Leviviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [3.5, 4.3],
+                            "lengthDescription": "3.5-4.3",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "26",
+                        "host": ["B"]
                     }
                 },
                 "Luteoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [5, 6],
+                            "lengthDescription": "5-6",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "25-30",
+                        "host": ["P"]
                     }
                 },
                 "Megabirnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "2 linear segments",
+                            "length": [16, 16],
+                            "lengthDescription": "7, 9",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "50",
+                        "host": ["F"]
                     }
                 },
                 "Metaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [4, 10],
+                            "lengthDescription": "4-10",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
+                            "RT": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": "both",
+                        "morphology": "intracellular virus-like particles and/or enveloped extracellular virions",
+                        "virionDescription": "unknown",
+                        "host": ["F", "I", "P", "V"]
                     }
                 },
                 "Microviridae": {
@@ -1271,164 +1239,155 @@
                 },
                 "Mimiviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
+                            "length": [1200, 1200],
                             "lengthDescription": "",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "pseudo-icosahedral",
+                        "virionDescription": "750",
+                        "host": ["Pr"]
                     }
                 },
                 "Nanoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "nanoviruses: 8; babuviruses: 6 circular segments",
+                            "length": [5.88, 8.8],
+                            "lengthDescription": "0.98-1.1 per segment",
                             "negative": false,
-                            "positive": false,
-                            "type": "ssRNA"
+                            "positive": true,
+                            "type": "ssDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "18-20",
+                        "host": ["P"]
                     }
                 },
                 "Narnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [2, 3],
+                            "lengthDescription": "2-3",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": "N/A",
+                        "morphology": "no true virions; intracellular RNP complex",
+                        "virionDescription": "N/A",
+                        "host": ["F"]
                     }
                 },
                 "Nimaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular genome",
+                            "length": [300, 300],
+                            "lengthDescription": "300",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "ovoidal, bacilliform",
+                        "virionDescription": "120-150 x 270-290",
+                        "host": ["I"]
                     }
                 },
                 "Nodaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "2 linear segments",
+                            "length": [4.5, 4.5],
+                            "lengthDescription": "3.1, 1.4",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "33",
+                        "host": ["V", "I"]
                     }
                 },
                 "Ophioviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
-                            "negative": false,
+                            "configurationDescription": "3 or 4 linear segments",
+                            "length": [12.1, 12.9],
+                            "lengthDescription": "7.6-8.2, 1.6-1.8, 1.5, 1.4",
+                            "negative": true,
                             "positive": false,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "filamentous, coiled",
+                        "virionDescription": "3 x >= 760",
+                        "host": ["P"]
                     }
                 },
                 "Orthomyxoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
-                            "negative": false,
+                            "configurationDescription": "6-8 linear segments",
+                            "length": [4.2, 19.2],
+                            "lengthDescription": "0.7-2.4 per segment",
+                            "negative": true,
                             "positive": false,
                             "type": "ssRNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "spherical, filamentous, pleomorphic",
+                        "virionDescription": "80-120",
+                        "host": ["V", "I"]
                     }
                 },
                 "Papillomaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
+                            "configurationDescription": "circular genome",
+                            "length": [6.8, 8.4],
                             "lengthDescription": "",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "55",
                         "host": ["V"]
                     }
                 },
                 "Partitiviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "2 linear segments",
+                            "length": [2.8, 4.8],
+                            "lengthDescription": "1.4-2.4 per segment",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "30-43",
+                        "host": ["P", "F"]
                     }
                 },
                 "Parvoviridae": {
@@ -1450,145 +1409,137 @@
                 },
                 "Permutotetraviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [5.6, 5.6],
+                            "lengthDescription": "5.6",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "40",
+                        "host": ["I"]
                     }
                 },
                 "Phycodnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [100, 560],
+                            "lengthDescription": "100-560",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "100-220",
+                        "host": ["Al"]
                     }
                 },
                 "Picobirnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "2 linear segments",
+                            "length": [3.9, 4.5],
+                            "lengthDescription": "2.4-2.6, 1.5-1.9",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "33-37",
                         "host": ["V"]
                     }
                 },
                 "Plasmaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "circular supercoiled genome",
+                            "length": [12, 12],
+                            "lengthDescription": "12",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "quasi-spherical, pleomorphic",
+                        "virionDescription": "50-125",
+                        "host": ["B"]
                     }
                 },
                 "Polydnaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "multiple supercoiled segments",
+                            "length": [190, 600],
+                            "lengthDescription": "total genome 190-600",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "prolate ellipsoid",
+                        "virionDescription": "bracovirus nucleocapsids: 34-40 x 8-150; ichnovirus nucleocapsids: 85 x 330",
+                        "host": ["I"]
                     }
                 },
                 "Polyomaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
+                            "configurationDescription": "circular genome",
+                            "length": [4.7, 5.4],
                             "lengthDescription": "",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "40-45",
                         "host": ["V"]
                     }
                 },
                 "Pospiviroidae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "1 circular (non-coding) segment",
+                            "length": [0.25, 0.375],
+                            "lengthDescription": "0.25-0.375",
                             "negative": false,
                             "positive": false,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "unencapsidated; rod-like",
+                        "virionDescription": "< 50",
                         "host": ["V"]
                     }
                 },
                 "Potyviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "1 or 2 linear segments",
+                            "length": [9.3, 11.3],
+                            "lengthDescription": "monopartite: 9.3-10.8; bipartite: 7.3-7.6, 3.5-3.7",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "filamentous",
+                        "virionDescription": "monopartite: 11-15 x 650-900; bipartite: 11-15 x 250-300 and 500-600",
                         "host": ["V"]
                     }
                 },
@@ -1611,38 +1562,37 @@
                 },
                 "Pseudoviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [5, 9],
+                            "lengthDescription": "5-9",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
+                            "RT": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
+                        "envelope": false,
+                        "morphology": "spherical, icosahedral",
+                        "virionDescription": "60-80",
                         "host": ["V"]
                     }
                 },
                 "Quadriviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "4 linear segments",
+                            "length": [14.8, 19.6],
+                            "lengthDescription": "3.7-4.9 each segment",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "icosahedral",
+                        "virionDescription": "48",
+                        "host": ["F"]
                     }
                 },
                 "Reoviridae": {
@@ -1682,80 +1632,127 @@
                 },
                 "Tectiviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [15, 15],
+                            "lengthDescription": "15",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsDNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "66",
+                        "host": ["B"]
                     }
                 },
                 "Togaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [9.7, 11.8],
+                            "lengthDescription": "9.7-11.8",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
                         "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "morphology": "spherical",
+                        "virionDescription": "60-70",
+                        "host": ["V", "I"]
                     }
                 },
                 "Tombusviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "1 or 2 linear segments",
+                            "length": [5.1, 6.2],
+                            "lengthDescription": "monopartite: 3.7-4.8; bipartite: 3.8, 1.4",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "28-35",
+                        "host": ["P"]
                     }
                 },
                 "Totiviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
                             "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "length": [4, 7],
+                            "lengthDescription": "4-7",
                             "negative": false,
                             "positive": false,
-                            "type": "ssRNA"
+                            "type": "dsRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "icosahedral",
+                        "virionDescription": "33-40",
+                        "host": ["F", "Pr"]
                     }
                 },
                 "Unassigned": {
                     "sub-family": {
                         "Unassigned": {
                             "genus": {
+                                "Bacilladnavirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 covalently closed circular molecule and 1 linear segment",
+                                            "length": [7, 7],
+                                            "lengthDescription": "7",
+                                            "negative": false,
+                                            "positive": false,
+                                            "type": "ssDNA"
+                                        },
+                                        "envelope": true,
+                                        "morphology": "icosahedral, spherical, rod-shaped",
+                                        "virionDescription": "34",
+                                        "host": ["Al"]
+                                    }
+                                },
+                                "Benyvirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "circular genome",
+                                            "length": [],
+                                            "lengthDescription": "",
+                                            "negative": false,
+                                            "positive": false,
+                                            "type": "ssDNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "icosahedral",
+                                        "virionDescription": "",
+                                        "host": ["V"]
+                                    }
+                                },
+                                "Cilevirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "2 linear segments",
+                                            "length": [13.7, 13.7],
+                                            "lengthDescription": "8.7, 5.0",
+                                            "negative": false,
+                                            "positive": true,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "bacilliform",
+                                        "virionDescription": "50-55 x 120-130",
+                                        "host": ["V"]
+                                    }
+                                },
                                 "Deltavirus": {
                                     "properties": {
                                         "genome": {
@@ -1771,6 +1768,23 @@
                                         "morphology": "spherical",
                                         "virionDescription": "36-43",
                                         "host": ["V"]
+                                    }
+                                },
+                                "Dinodnavirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 linear segment",
+                                            "length": [356, 356],
+                                            "lengthDescription": "356",
+                                            "negative": false,
+                                            "positive": false,
+                                            "type": "dsDNA"
+                                        },
+                                        "envelope": true,
+                                        "morphology": "icosahedral",
+                                        "virionDescription": "180-210",
+                                        "host": ["Pr"]
                                     }
                                 },
                                 "Emaravirus": {
@@ -1790,6 +1804,108 @@
                                         "host": ["P"]
                                     }
                                 },
+                                "Idaeovirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "2 linear segments",
+                                            "length": [7.7, 7.7],
+                                            "lengthDescription": "5.5, 2.2",
+                                            "negative": false,
+                                            "positive": true,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "icosahedral",
+                                        "virionDescription": "33",
+                                        "host": ["P"]
+                                    }
+                                },
+                                "Ourmiavirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "3 linear segments",
+                                            "length": [4.87, 4.87],
+                                            "lengthDescription": "2.8, 1.1, 0.97",
+                                            "negative": false,
+                                            "positive": true,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "bacilliform",
+                                        "virionDescription": "18 x 30-62",
+                                        "host": ["P"]
+                                    }
+                                },
+                                "Polemovirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 linear segment",
+                                            "length": [4.6, 4.6],
+                                            "lengthDescription": "4.6",
+                                            "negative": false,
+                                            "positive": true,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "icosahedral",
+                                        "virionDescription": "34",
+                                        "host": ["P"]
+                                    }
+                                },
+                                "Rhizidiovirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 linear segment",
+                                            "length": [27, 27],
+                                            "lengthDescription": "27 (estimate)",
+                                            "negative": false,
+                                            "positive": false,
+                                            "type": "dsDNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "icosahedral",
+                                        "virionDescription": "60",
+                                        "host": ["Pr"]
+                                    }
+                                },
+                                "Salterprovirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 linear segment",
+                                            "length": [14.5, 14.5],
+                                            "lengthDescription": "14.5",
+                                            "negative": false,
+                                            "positive": false,
+                                            "type": "dsDNA"
+                                        },
+                                        "envelope": true,
+                                        "morphology": "lemon-shaped",
+                                        "virionDescription": "44-77",
+                                        "host": ["Ar"]
+                                    }
+                                },
+                                "Sobemovirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 linear segment",
+                                            "length": [4, 5],
+                                            "lengthDescription": "4-5",
+                                            "negative": false,
+                                            "positive": true,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "icosahedral",
+                                        "virionDescription": "25-30",
+                                        "host": ["P"]
+                                    }
+                                },
                                 "Tenuivirus": {
                                     "properties": {
                                         "genome": {
@@ -1806,6 +1922,40 @@
                                         "virionDescription": "3-10 x 100",
                                         "host": ["P", "I"]
                                     }
+                                },
+                                "Umbravirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "1 linear segment",
+                                            "length": [4, 4.2],
+                                            "lengthDescription": "4.0-4.2",
+                                            "negative": false,
+                                            "positive": true,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": "N/A",
+                                        "morphology": "no true virions; intracellular RNP complex",
+                                        "virionDescription": "N/A",
+                                        "host": ["P"]
+                                    }
+                                },
+                                "Varicosavirus": {
+                                    "properties": {
+                                        "genome": {
+                                            "ambisense": false,
+                                            "configurationDescription": "2 linear segments",
+                                            "length": [12.9, 12.9],
+                                            "lengthDescription": "6.8, 6.1",
+                                            "negative": true,
+                                            "positive": false,
+                                            "type": "ssRNA"
+                                        },
+                                        "envelope": false,
+                                        "morphology": "rod-shaped",
+                                        "virionDescription": "18 x 320-360",
+                                        "host": ["P"]
+                                    }
                                 }
                             }
                         }
@@ -1813,20 +1963,19 @@
                 },
                 "Virgaviridae": {
                     "properties": {
-                        "INCOMPLETE": true,
                         "genome": {
                             "ambisense": false,
-                            "configurationDescription": "1 linear segment",
-                            "length": [],
-                            "lengthDescription": "",
+                            "configurationDescription": "1-3 linear segments",
+                            "length": [6.3, 12.8],
+                            "lengthDescription": "monopartite: 6.3-6.6; bipartite: 6-7, 1.8-4.5; tripartite: 3.7-6, 3.0-3.6, 2.5-3.2",
                             "negative": false,
-                            "positive": false,
+                            "positive": true,
                             "type": "ssRNA"
                         },
-                        "envelope": true,
-                        "morphology": "",
-                        "virionDescription": "",
-                        "host": ["V"]
+                        "envelope": false,
+                        "morphology": "rod-shaped",
+                        "virionDescription": "18-21 x 50-310",
+                        "host": ["I"]
                     }
                 }
             }

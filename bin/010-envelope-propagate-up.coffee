@@ -23,13 +23,19 @@ extractEnvelopeType = (tree) ->
             first = true
             for name of node[levelName]
                 if node[levelName][name].properties?.envelope?
+                    thisEnvelope = node[levelName][name].properties.envelope
                     if first
                         first = false
-                        common = node[levelName][name].properties.envelope
+                        common = thisEnvelope
                     else
-                        if common != node[levelName][name].properties.envelope
-                            # Not all children have the same envelope type.
-                            return
+                        if common != thisEnvelope
+                            if common == true and thisEnvelope == false or common == false and thisEnvelope == true
+                                common = 'both'
+                            else if common == 'both' and (thisEnvelope == true or thisEnvelope == false)
+                                common == 'both' # Do nothing.
+                            else
+                                # Not all children have the same envelope type.
+                                return
                 else
                     # A child with no envelope setting doesn't result in
                     # the parent getting a setting.

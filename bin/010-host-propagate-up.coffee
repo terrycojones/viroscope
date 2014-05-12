@@ -26,6 +26,9 @@ propagateVirionSize = (tree) ->
             for name of node[levelName]
                 if node[levelName][name].properties?.host
                     for host in node[levelName][name].properties.host
+                        if host not in ["Al", "Ar", "B", "F", "I", "P", "Pr", "V"]
+                            process.stderr.write "Unknown host abbreviation #{host}.\n"
+                            process.exit 1
                         count += 1
                         hosts[host] = true
 
